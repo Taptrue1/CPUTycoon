@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Core.CPU
 {
     public class Processor
@@ -6,6 +8,9 @@ namespace Core.CPU
         private readonly int _frequency;
         private readonly int _cache;
 
+        private const float TechProcessCoefficient = 10000;
+        private const float CacheCoefficient = 100;
+        
         public Processor(int techProcess, int frequency, int cache)
         {
             _techProcess = techProcess;
@@ -15,7 +20,7 @@ namespace Core.CPU
 
         public int GetPowerScore()
         {
-            var score = _techProcess + _cache + _frequency;
+            var score = Mathf.CeilToInt(TechProcessCoefficient * (10000 -_techProcess) + CacheCoefficient * _cache + _frequency);
 
             return score;
         }
