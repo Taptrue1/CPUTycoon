@@ -12,7 +12,7 @@ namespace Core
         private void Awake()
         {
             _processorBuilder.ProcessorCreated += OnProcessorCreated;
-            
+
             _openProcessorBuilderButton.onClick.AddListener(OnOpenProcessorBuilderButtonClick);
         }
 

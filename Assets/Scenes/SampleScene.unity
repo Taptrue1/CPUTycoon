@@ -1319,6 +1319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536983032}
+  - component: {fileID: 536983033}
   m_Layer: 5
   m_Name: Frequency
   m_TagString: Untagged
@@ -1350,6 +1351,21 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &536983033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536983031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9571aa36d59457f9d0f89e30b33a682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangeStep: 0
+  _increaseButton: {fileID: 1934769468}
+  _decreaseButton: {fileID: 1279195205}
 --- !u!1 &575122162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2651,6 +2667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1365947041}
+  - component: {fileID: 1365947042}
   m_Layer: 5
   m_Name: TechProcess
   m_TagString: Untagged
@@ -2682,6 +2699,21 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: -150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1365947042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365947040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9571aa36d59457f9d0f89e30b33a682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangeStep: 0
+  _increaseButton: {fileID: 575122164}
+  _decreaseButton: {fileID: 623346208}
 --- !u!1 &1472138673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,20 +2748,17 @@ MonoBehaviour:
   _techProcessBounds:
     Min: 1
     Max: 10000
-  _increaseTechProcessButton: {fileID: 575122164}
-  _decreaseTechProcessButton: {fileID: 623346208}
+  _techProcessInputField: {fileID: 1365947042}
   _techProcessTextObject: {fileID: 414601187}
   _cacheBounds:
     Min: 1
     Max: 1024
-  _increaseCacheButton: {fileID: 1719716313}
-  _decreaseCacheButton: {fileID: 745189967}
+  _cacheInputField: {fileID: 1501600850}
   _cacheTextObject: {fileID: 1705490425}
   _frequencyBounds:
     Min: 1000
     Max: 10000000
-  _increaseFrequencyButton: {fileID: 1934769468}
-  _decreaseFrequencyButton: {fileID: 1279195205}
+  _frequencyInputField: {fileID: 536983033}
   _frequencyTextObject: {fileID: 394300596}
 --- !u!4 &1472138675
 Transform:
@@ -2755,6 +2784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1501600849}
+  - component: {fileID: 1501600850}
   m_Layer: 5
   m_Name: Cache
   m_TagString: Untagged
@@ -2786,6 +2816,21 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1501600850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501600848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9571aa36d59457f9d0f89e30b33a682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangeStep: 0
+  _increaseButton: {fileID: 1719716313}
+  _decreaseButton: {fileID: 745189967}
 --- !u!1 &1528579124
 GameObject:
   m_ObjectHideFlags: 0
