@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Utils.CustomNumbers
 {
-    class CustomNumber<T> : ICustomNumber where T : struct
+    public class CustomNumber<T> : ICustomNumber where T : struct
     {
         public event Action<T> Changed;
         event Action ICustomNumber.Changed
