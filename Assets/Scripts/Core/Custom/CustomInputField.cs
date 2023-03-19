@@ -1,7 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Utils.CustomNumbers;
+using Button = UnityEngine.UI.Button;
 
 namespace Core.Custom
 {
@@ -10,42 +11,51 @@ namespace Core.Custom
         [SerializeField] private Button _increaseButton;
         [SerializeField] private Button _decreaseButton;
         [SerializeField] private TextMeshProUGUI _valueTextObject;
-        [SerializeField] private string _valueTextFormat = "{0:0.00}";
+        [SerializeField] private string _format = "{0}";
+        
+        private double _minValue;
+        private double _maxValue;
+        private double _changeValue;
+        private CustomNumber<double> _currentValue;
 
-        private Utils.Bounds _bounds;
-        private CustomNumber<float> _customNumber;
-        private float _changeStep;
-        
-        
-        public void Init(CustomNumber<float> customNumber,  Utils.Bounds bounds, float changeStep)
+        private void Awake()
         {
-            _bounds = bounds;
-            _customNumber = customNumber;
-            _changeStep = changeStep;
+            _currentValue = new CustomNumber<double>();
+            
+            _currentValue.Changed += OnValueChanged;
+            
+            _increaseButton.onClick.AddListener(OnIncreaseButtonClicked);
+            _decreaseButton.onClick.AddListener(OnDecreaseButtonClicked);
+        }
 
-            _customNumber.Value = _bounds.Min;
-            
-            _customNumber.Changed += UpdateText;
-            
-            _increaseButton.onClick.RemoveAllListeners();
-            _decreaseButton.onClick.RemoveAllListeners();
-            _increaseButton.onClick.AddListener(OnIncreaseButtonClick);
-            _decreaseButton.onClick.AddListener(OnDecreaseButtonClick);
-            
-            UpdateText(_customNumber.Value);
-        }
-        
-        private void OnIncreaseButtonClick()
+        public void SetBounds(double min, double max)
         {
-            _customNumber.Value = Mathf.Clamp(_customNumber.Value + _changeStep, _bounds.Min, _bounds.Max);
+            _minValue = min;
+            _maxValue = max;
+            
+            SetValue(_currentValue.Value);
         }
-        private void OnDecreaseButtonClick()
+        public void SetChangeValue(double value)
         {
-            _customNumber.Value = Mathf.Clamp(_customNumber.Value - _changeStep, _bounds.Min, _bounds.Max);
+            _changeValue = value;
         }
-        private void UpdateText(float value)
+
+        private void OnValueChanged(double value)
         {
-            _valueTextObject.text = string.Format(_valueTextFormat, value);
+            _valueTextObject.text = string.Format(_format, value);
+        }
+        private void OnIncreaseButtonClicked()
+        {
+            SetValue(_currentValue.Value + _changeValue);
+        }
+        private void OnDecreaseButtonClicked()
+        {
+            SetValue(_currentValue.Value - _changeValue);
+        }
+
+        private void SetValue(double value)
+        {
+            _currentValue.Value = Math.Clamp(value, _minValue, _maxValue);
         }
     }
 }

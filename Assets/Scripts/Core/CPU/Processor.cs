@@ -1,28 +1,31 @@
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.CPU
 {
     public class Processor
     {
-        private readonly int _techProcess;
-        private readonly int _frequency;
-        private readonly int _cache;
+        public string Name { get; }
+        public double Price { get; }
+        public double Power => GetTotalPower();
 
-        private const float TechProcessCoefficient = 10000;
-        private const float CacheCoefficient = 100;
+        private readonly List<Technologies.Technology> _technologies;
         
-        public Processor(int techProcess, int frequency, int cache)
+        public Processor(string name, double price, List<Technologies.Technology> technologies)
         {
-            _techProcess = techProcess;
-            _frequency = frequency;
-            _cache = cache;
+            Name = name;
+            Price = price;
+            _technologies = technologies;
         }
-
-        public int GetPowerScore()
+        
+        public string GetTechnologiesString()
         {
-            var score = Mathf.CeilToInt(TechProcessCoefficient * (10000 -_techProcess) + CacheCoefficient * _cache + _frequency);
-
-            return score;
+            return string.Join("\n", _technologies.Select(technology => technology.Name));
+        }
+        
+        private double GetTotalPower()
+        {
+            return _technologies.Sum(technology => technology.Power);
         }
     }
 }

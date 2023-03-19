@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f32474745b46c982629e1db7473ade, type: 3}
+  m_Name: TechnologyData 1
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Multythreading
+  <Description>k__BackingField: Creates a two threads for one core
+  <PowerProgression>k__BackingField:
+    <DefaultValue>k__BackingField: 12
+    <GrowthValue>k__BackingField: 33
+    <ProgressionType>k__BackingField: 0
+  <LevelProgression>k__BackingField:
+    <DefaultValue>k__BackingField: 12
+    <GrowthValue>k__BackingField: 33
+    <ProgressionType>k__BackingField: 0
