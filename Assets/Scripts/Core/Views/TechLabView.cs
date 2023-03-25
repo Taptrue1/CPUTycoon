@@ -20,7 +20,7 @@ namespace Core.Views
         
         private void Awake()
         {
-            var technologyDatas = Resources.LoadAll<TechnologyData>($"Data/Technologies");
+            var technologyDatas = Resources.LoadAll<TechnologyConfig>($"Data/Technologies");
             _technologies = new List<Technology>();
             foreach (var technologyData in technologyDatas)
             {

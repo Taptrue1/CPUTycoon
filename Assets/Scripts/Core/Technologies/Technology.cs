@@ -10,13 +10,13 @@ namespace Core.Technologies
         private readonly Level _level;
         private readonly Progression _powerProgression;
 
-        public Technology(TechnologyData data)
+        public Technology(TechnologyConfig config)
         {
-            Name = data.Name;
-            Description = data.Description;
+            Name = config.Name;
+            Description = config.Description;
 
-            _level = new(data.LevelProgression);
-            _powerProgression = data.PowerProgression;
+            _level = new(config.ExperienceProgression);
+            _powerProgression = config.PowerProgression;
         }
 
         public void AddExperience(double experience)
