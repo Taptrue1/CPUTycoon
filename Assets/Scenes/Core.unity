@@ -241,7 +241,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.4192951, g: 0.45917332, b: 0.49056602, a: 0}
+  m_BackGroundColor: {r: 0.105882354, g: 0.105882354, b: 0.7019608, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -390,12 +390,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &341350461 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7748182448277593064, guid: 3cf799e82c7959442b307265c3184f2c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7748182447947776981}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &508786703
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,8 +420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _openButton: {fileID: 120149866}
-  _panel: {fileID: 1123598244}
-  _contentTransfrom: {fileID: 341350461}
+  _panel: {fileID: 0}
+  _contentTransfrom: {fileID: 0}
   _technologyViewPrefab: {fileID: 3067254682242778016, guid: 6d6e861655232b5459f3455f1e35358c,
     type: 3}
 --- !u!4 &508786705
@@ -476,12 +470,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1123598244 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7748182449043061873, guid: 3cf799e82c7959442b307265c3184f2c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7748182447947776981}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1447203214
 GameObject:
   m_ObjectHideFlags: 0
