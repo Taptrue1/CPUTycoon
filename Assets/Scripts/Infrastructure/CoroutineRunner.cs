@@ -10,13 +10,13 @@ namespace Infrastructure
             DontDestroyOnLoad(gameObject);
         }
         
-        public Coroutine RunCoroutine(IEnumerator coroutine)
+        public new Coroutine StartCoroutine(IEnumerator coroutine)
         {
-            return StartCoroutine(coroutine);
+            return base.StartCoroutine(coroutine);
         }
-        public void StopCoroutine(Coroutine coroutine)
+        public new void StopCoroutine(Coroutine coroutine)
         {
-            StopCoroutine(coroutine);
+            base.StopCoroutine(coroutine);
         }
     }
 }
