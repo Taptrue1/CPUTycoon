@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.GameSpeedStateMachines;
 using Core.GameSpeedStateMachines.States;
+using Cysharp.Threading.Tasks;
 using Infrastructure;
 using Settings;
 using UnityEngine;
@@ -18,15 +19,13 @@ namespace Core.Services
         
         private readonly GameSpeedStateMachine _gameSpeedStateMachine;
         private readonly GameSpeedSettings _gameSpeedSettings;
-        private readonly CoroutineRunner _coroutineRunner;
-        private readonly WaitForSeconds _waitForTick = new(1f);
+        private const int TickInterval = 1;
 
         [Inject]
-        public TickService(CoreSettings coreSettings, CoroutineRunner coroutineRunner)
+        public TickService(CoreSettings coreSettings)
         {
             _gameSpeedSettings = coreSettings.GameSpeedSettings;
-            _coroutineRunner = coroutineRunner;
-            
+
             var gameSpeedStates = new Dictionary<Type, IGameSpeedState>()
             {
                 { typeof(PauseGameSpeedState), new PauseGameSpeedState(_gameSpeedSettings.PauseTimeScale) },
@@ -35,8 +34,8 @@ namespace Core.Services
                 { typeof(FastestGameSpeedState), new FastestGameSpeedState(_gameSpeedSettings.FastestTimeScale) }
             };
             _gameSpeedStateMachine = new GameSpeedStateMachine(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
-
-            _tickCoroutine = _coroutineRunner.StartCoroutine(StartTicking());
+            
+            StartTicking().Forget();
         }
         
         public void ChangeGameSpeedState<T>() where T : IGameSpeedState
@@ -44,11 +43,11 @@ namespace Core.Services
             _gameSpeedStateMachine.SwitchState<T>();
         }
 
-        private IEnumerator StartTicking()
+        private async UniTaskVoid StartTicking()
         {
             while (true)
             {
-                yield return _waitForTick;
+                await UniTask.Delay(TimeSpan.FromSeconds(TickInterval));
                 Tick?.Invoke();
             }
         }
