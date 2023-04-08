@@ -1,27 +1,30 @@
+using Core.Datas;
+using Utils;
+
 namespace Core.Technologies
 {
     public class Technology
     {
         public string Name { get; }
         public string Description { get; }
-        public double Level => _level.Value;
-        public double Power => _powerProgression.GetProgressionValue(Level);
+        public Level Level { get; }
+        public double ResearchCost => _researchCostProgression.GetProgressionValue(Level.Value);
+        public double ImplementationCost => _implementationCostProgression.GetProgressionValue(Level.Value);
+        public double Power => _powerProgression.GetProgressionValue(Level.Value);
 
-        private readonly Level _level;
+        private readonly Progression _researchCostProgression;
+        private readonly Progression _implementationCostProgression;
         private readonly Progression _powerProgression;
 
-        public Technology(TechnologyConfig config)
+        public Technology(TechnologyData data, Level level)
         {
-            Name = config.Name;
-            Description = config.Description;
-
-            _level = new(config.ExperienceProgression);
-            _powerProgression = config.PowerProgression;
-        }
-
-        public void AddExperience(double experience)
-        {
-            _level.AddExperience(experience);
+            Name = data.Name;
+            Description = data.Description;
+            
+            Level = level;
+            _researchCostProgression = data.ResearchCost;
+            _implementationCostProgression = data.ImplementationCost;
+            _powerProgression = data.Power;
         }
     }
 }

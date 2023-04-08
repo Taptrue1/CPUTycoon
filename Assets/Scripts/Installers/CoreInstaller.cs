@@ -1,4 +1,7 @@
 using Core;
+using Core.Services;
+using Infrastructure;
+using Settings;
 using UnityEngine;
 using Zenject;
 
@@ -6,13 +9,16 @@ namespace Installers
 {
     public class CoreInstaller : MonoInstaller
     {
-        [SerializeField] private string _coreSettings;
+        [Inject] private CoreSettings _coreSettings;
         
         public override void InstallBindings()
         {
-            var game = new Game();
+            var coroutineRunner = Instantiate(new GameObject("CoroutineRunner")).AddComponent<CoroutineRunner>();
+
+            Container.Bind<CoroutineRunner>().FromInstance(coroutineRunner);
+            Container.Bind<TickService>().AsSingle().NonLazy();
             
-            Debug.Log("Core bindings installed");
+            var game = new Game();
         }
     }
 }

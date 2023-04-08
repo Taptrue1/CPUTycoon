@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Technologies;
 
 namespace Core.CPU
 {
@@ -7,25 +8,17 @@ namespace Core.CPU
     {
         public string Name { get; }
         public double Price { get; }
-        public double Power => GetTotalPower();
+        public double Power { get; }
 
-        private readonly List<Technologies.Technology> _technologies;
-        
-        public Processor(string name, double price, List<Technologies.Technology> technologies)
+        private List<Technology> _technologies;
+
+        public Processor(string name, double price, List<Technology> technologies)
         {
             Name = name;
             Price = price;
+            Power = technologies.Sum(technology => technology.Power);
+            
             _technologies = technologies;
-        }
-        
-        public string GetTechnologiesString()
-        {
-            return string.Join("\n", _technologies.Select(technology => technology.Name));
-        }
-        
-        private double GetTotalPower()
-        {
-            return _technologies.Sum(technology => technology.Power);
         }
     }
 }
