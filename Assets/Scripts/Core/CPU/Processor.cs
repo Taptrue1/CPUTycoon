@@ -9,14 +9,16 @@ namespace Core.CPU
         public string Name { get; }
         public double Price { get; }
         public double Power { get; }
+        public double DevelopmentCost { get; }
 
-        private List<Technology> _technologies;
+        private readonly List<Technology> _technologies;
 
         public Processor(string name, double price, List<Technology> technologies)
         {
             Name = name;
             Price = price;
             Power = technologies.Sum(technology => technology.Power);
+            DevelopmentCost = technologies.Sum(technology => technology.DevelopmentCost);
             
             _technologies = technologies;
         }

@@ -24,8 +24,6 @@ namespace Core.Services
         [Inject]
         public TickService(CoreSettings coreSettings)
         {
-            _gameSpeedSettings = coreSettings.GameSpeedSettings;
-
             var gameSpeedStates = new Dictionary<Type, IGameSpeedState>()
             {
                 { typeof(PauseGameSpeedState), new PauseGameSpeedState(_gameSpeedSettings.PauseTimeScale) },
@@ -33,7 +31,9 @@ namespace Core.Services
                 { typeof(FastGameSpeedState), new FastGameSpeedState(_gameSpeedSettings.FastTimeScale) },
                 { typeof(FastestGameSpeedState), new FastestGameSpeedState(_gameSpeedSettings.FastestTimeScale) }
             };
-            _gameSpeedStateMachine = new GameSpeedStateMachine(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
+            
+            _gameSpeedSettings = coreSettings.GameSpeedSettings;
+            _gameSpeedStateMachine = new(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
             
             StartTicking().Forget();
         }

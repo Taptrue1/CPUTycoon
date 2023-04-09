@@ -9,7 +9,7 @@ namespace Core.Datas
         [field: SerializeField] public string Name { get; }
         [field: SerializeField] public string Description { get; }
         [field: SerializeField] public Progression ResearchCost { get; }
-        [field: SerializeField] public Progression ImplementationCost { get; }
+        [field: SerializeField] public Progression DevelopmentCost { get; }
         [field: SerializeField] public Progression Power { get; }
     }
 }

@@ -6,7 +6,7 @@ namespace Core
     public class Market
     {
         private readonly Company _playerCompany;
-        private readonly Company[] _enemyCompanies;
+        private readonly string _enemyCompanies;
         
         public Market(Company playerCompany)
         {

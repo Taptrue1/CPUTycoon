@@ -18,7 +18,7 @@ namespace Installers
             Container.Bind<CoroutineRunner>().FromInstance(coroutineRunner);
             Container.Bind<TickService>().AsSingle().NonLazy();
             
-            var game = new Game();
+            var game = new Game(Container.Resolve<TickService>());
         }
     }
 }

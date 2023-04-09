@@ -1,29 +1,28 @@
+using System;
 using Core.Datas;
 using Utils;
 
 namespace Core.Technologies
 {
+    [Serializable]
     public class Technology
     {
         public string Name { get; }
         public string Description { get; }
         public Level Level { get; }
-        public double ResearchCost => _researchCostProgression.GetProgressionValue(Level.Value);
-        public double ImplementationCost => _implementationCostProgression.GetProgressionValue(Level.Value);
+        public double DevelopmentCost => _developmentCostProgression.GetProgressionValue(Level.Value);
         public double Power => _powerProgression.GetProgressionValue(Level.Value);
-
-        private readonly Progression _researchCostProgression;
-        private readonly Progression _implementationCostProgression;
+        
+        private readonly Progression _developmentCostProgression;
         private readonly Progression _powerProgression;
 
-        public Technology(TechnologyData data, Level level)
+        public Technology(TechnologyData data)
         {
             Name = data.Name;
             Description = data.Description;
+            Level = new(data.ResearchCost);
             
-            Level = level;
-            _researchCostProgression = data.ResearchCost;
-            _implementationCostProgression = data.ImplementationCost;
+            _developmentCostProgression = data.DevelopmentCost;
             _powerProgression = data.Power;
         }
     }
