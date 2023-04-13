@@ -7,5 +7,6 @@ namespace Settings
     {
         [field: SerializeField] public GameSpeedSettings GameSpeedSettings { get; private set; }
         [field: SerializeField] public TechnologiesSettings TechnologiesSetting { get; private set; }
+        [field: SerializeField] public UISettings UISettings { get; private set; }
     }
 }

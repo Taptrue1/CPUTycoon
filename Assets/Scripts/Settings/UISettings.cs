@@ -1,0 +1,14 @@
+using Core.UI;
+using UnityEngine;
+
+namespace Settings
+{
+    [CreateAssetMenu(fileName = "UISettings", menuName = "Settings/UISettings")]
+    public class UISettings : ScriptableObject
+    {
+        [field: SerializeField] public Canvas Canvas { get; private set; }
+        [field: SerializeField] public WindowPresenter CoreWindow { get; private set; }
+        [field: SerializeField] public WindowPresenter ResearchWindow { get; private set; }
+        [field: SerializeField] public WindowPresenter DevelopmentWindow { get; private set; }
+    }
+}

@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Core;
 using Core.Services;
-using Infrastructure;
+using Core.UI;
 using Settings;
-using UnityEngine;
 using Zenject;
 
 namespace Installers
@@ -13,12 +13,26 @@ namespace Installers
         
         public override void InstallBindings()
         {
-            var coroutineRunner = Instantiate(new GameObject("CoroutineRunner")).AddComponent<CoroutineRunner>();
-
-            Container.Bind<CoroutineRunner>().FromInstance(coroutineRunner);
             Container.Bind<TickService>().AsSingle().NonLazy();
             
+            InstallUI();
+            
             var game = new Game(Container.Resolve<TickService>());
+        }
+
+        private void InstallUI()
+        {
+            var canvas = Instantiate(_coreSettings.UISettings.Canvas);
+            var windows = new List<WindowPresenter>()
+            {
+                _coreSettings.UISettings.CoreWindow,
+                _coreSettings.UISettings.ResearchWindow,
+                _coreSettings.UISettings.DevelopmentWindow
+            };
+            var uiFactory = new UIFactory(canvas);
+            var uiService = new UIService(uiFactory, windows);
+            
+            Container.BindInstance(uiService).AsSingle();
         }
     }
 }

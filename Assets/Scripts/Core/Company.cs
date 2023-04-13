@@ -15,7 +15,6 @@ namespace Core
         public double Money { get; private set; }
         public double ResearchPoints { get; private set; }
         public double DevelopmentPoints { get; private set; }
-        public Processor ActiveProduct { get; private set; }
         public List<Technology> Technologies { get; private set; }
 
         private Processor _activeDevelopingProduct;
@@ -35,24 +34,26 @@ namespace Core
         public void SetResearchPoints(double researchPoints)
         {
             if(researchPoints < 0) 
-                throw new System.ArgumentException("Research points cannot be negative");
+                throw new ArgumentException("Research points cannot be negative");
             
             ResearchPoints = researchPoints;
         }
         public void SetDevelopmentPoints(double developmentPoints)
         {
             if(developmentPoints < 0) 
-                throw new System.ArgumentException("Development points cannot be negative");
+                throw new ArgumentException("Development points cannot be negative");
             
             DevelopmentPoints = developmentPoints;
         }
         public void ResearchTechnology(Technology technology)
         {
             _activeResearchingTechnology = technology;
+            ActiveTechnologyChanged?.Invoke(technology);
         }
         public void DevelopProcessor(Processor processor)
         {
             _activeDevelopingProduct = processor;
+            ActiveProductChanged?.Invoke(processor);
         }
 
         private void OnTick()

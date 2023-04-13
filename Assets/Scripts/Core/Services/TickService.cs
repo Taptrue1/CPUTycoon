@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Core.GameSpeedStateMachines;
 using Core.GameSpeedStateMachines.States;
 using Cysharp.Threading.Tasks;
-using Infrastructure;
 using Settings;
 using UnityEngine;
 using Zenject;
