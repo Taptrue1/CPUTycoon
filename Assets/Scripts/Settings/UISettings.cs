@@ -1,4 +1,5 @@
 using Core.UI;
+using Core.UI.Windows;
 using UnityEngine;
 
 namespace Settings

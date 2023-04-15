@@ -12,7 +12,6 @@ namespace Core.UI
         {
             _canvasTransform = canvas.transform;
         }
-        
         public List<WindowPresenter> CreateWindows(IEnumerable<WindowPresenter> windowPrefabs)
         {
             return windowPrefabs.Select(CreateWindow).ToList();

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core;
 using Core.Services;
 using Core.UI;
+using Core.UI.Windows;
 using Settings;
 using Zenject;
 
@@ -23,7 +24,7 @@ namespace Installers
         private void InstallUI()
         {
             var canvas = Instantiate(_coreSettings.UISettings.Canvas);
-            var windows = new List<WindowPresenter>()
+            var windows = new List<WindowPresenter>
             {
                 _coreSettings.UISettings.CoreWindow,
                 _coreSettings.UISettings.ResearchWindow,
@@ -32,6 +33,9 @@ namespace Installers
             var uiFactory = new UIFactory(canvas);
             var uiService = new UIService(uiFactory, windows);
             
+            uiService.ShowWindow<CoreWindow>();
+            
+            //Container.BindInstance(uiFactory).AsSingle();
             Container.BindInstance(uiService).AsSingle();
         }
     }
