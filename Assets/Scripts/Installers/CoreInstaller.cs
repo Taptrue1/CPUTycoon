@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using Core;
+using Core.Games;
 using Core.Services;
 using Core.UI;
 using Core.UI.Windows;
 using Settings;
+using UnityEngine;
 using Zenject;
 
 namespace Installers
@@ -15,10 +16,9 @@ namespace Installers
         public override void InstallBindings()
         {
             Container.Bind<TickService>().AsSingle().NonLazy();
-            
+            Container.Bind<Game>().AsSingle().NonLazy();
+
             InstallUI();
-            
-            var game = new Game(Container.Resolve<TickService>());
         }
 
         private void InstallUI()
@@ -30,13 +30,12 @@ namespace Installers
                 _coreSettings.UISettings.ResearchWindow,
                 _coreSettings.UISettings.DevelopmentWindow
             };
-            var uiFactory = new UIFactory(canvas);
-            var uiService = new UIService(uiFactory, windows);
+
+            Container.Bind<Canvas>().FromInstance(canvas).AsSingle();
+            Container.Bind<UIFactory>().AsSingle().NonLazy();
+            Container.Bind<UIService>().AsSingle().NonLazy();
             
-            uiService.ShowWindow<CoreWindow>();
-            
-            //Container.BindInstance(uiFactory).AsSingle();
-            Container.BindInstance(uiService).AsSingle();
+            Container.Resolve<UIService>().InitializeWindows<CoreWindow>(windows);
         }
     }
 }

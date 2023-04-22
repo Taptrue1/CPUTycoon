@@ -13,10 +13,10 @@ namespace Core.Services
     {
         public event Action Tick;
         
+        //TODO add cancellation token for StartTicking
         private Coroutine _tickCoroutine;
         
         private readonly GameSpeedStateMachine _gameSpeedStateMachine;
-        private readonly GameSpeedSettings _gameSpeedSettings;
         private const int TickInterval = 1;
 
         [Inject]
@@ -24,13 +24,12 @@ namespace Core.Services
         {
             var gameSpeedStates = new Dictionary<Type, IGameSpeedState>()
             {
-                { typeof(PauseGameSpeedState), new PauseGameSpeedState(_gameSpeedSettings.PauseTimeScale) },
-                { typeof(NormalGameSpeedState), new NormalGameSpeedState(_gameSpeedSettings.NormalTimeScale) },
-                { typeof(FastGameSpeedState), new FastGameSpeedState(_gameSpeedSettings.FastTimeScale) },
-                { typeof(FastestGameSpeedState), new FastestGameSpeedState(_gameSpeedSettings.FastestTimeScale) }
+                { typeof(PauseGameSpeedState), new PauseGameSpeedState(coreSettings.GameSpeedSettings.PauseTimeScale) },
+                { typeof(NormalGameSpeedState), new NormalGameSpeedState(coreSettings.GameSpeedSettings.NormalTimeScale) },
+                { typeof(FastGameSpeedState), new FastGameSpeedState(coreSettings.GameSpeedSettings.FastTimeScale) },
+                { typeof(FastestGameSpeedState), new FastestGameSpeedState(coreSettings.GameSpeedSettings.FastestTimeScale) }
             };
             
-            _gameSpeedSettings = coreSettings.GameSpeedSettings;
             _gameSpeedStateMachine = new(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
             
             StartTicking().Forget();

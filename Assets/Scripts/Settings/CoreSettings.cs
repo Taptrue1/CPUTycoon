@@ -6,7 +6,7 @@ namespace Settings
     public class CoreSettings : ScriptableObject
     {
         [field: SerializeField] public GameSpeedSettings GameSpeedSettings { get; private set; }
-        [field: SerializeField] public TechnologiesSettings TechnologiesSetting { get; private set; }
+        [field: SerializeField] public TechnologiesSettings TechnologiesSettings { get; private set; }
         [field: SerializeField] public UISettings UISettings { get; private set; }
     }
 }

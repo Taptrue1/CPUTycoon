@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cc90996dd144a8a53e3f66944cfd23, type: 3}
+  m_Name: UISettings
+  m_EditorClassIdentifier: 
+  <Canvas>k__BackingField: {fileID: 7748182447972887377, guid: 3cf799e82c7959442b307265c3184f2c,
+    type: 3}
+  <CoreWindow>k__BackingField: {fileID: 7883556719035384693, guid: 9ec7239c3c7d9fc479330909d5ade4cb,
+    type: 3}
+  <ResearchWindow>k__BackingField: {fileID: 7926374865456362996, guid: dab6867d55e461043b86e6a6271f4346,
+    type: 3}
+  <DevelopmentWindow>k__BackingField: {fileID: 4805397417522580072, guid: 7bddc1da3051a7e4e9a0fde0be4b63d5,
+    type: 3}
+  <TechnologyView>k__BackingField: {fileID: -8092261342021120046, guid: 2f39596bb651b0a4dbc0d0f2b94e959a,
+    type: 3}

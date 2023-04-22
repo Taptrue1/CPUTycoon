@@ -1,5 +1,5 @@
 using Core.UI;
-using Core.UI.Windows;
+using Core.UI.Views;
 using UnityEngine;
 
 namespace Settings
@@ -8,8 +8,13 @@ namespace Settings
     public class UISettings : ScriptableObject
     {
         [field: SerializeField] public Canvas Canvas { get; private set; }
+        
+        [field: Header("Windows")]
         [field: SerializeField] public WindowPresenter CoreWindow { get; private set; }
         [field: SerializeField] public WindowPresenter ResearchWindow { get; private set; }
         [field: SerializeField] public WindowPresenter DevelopmentWindow { get; private set; }
+        
+        [field: Header("Views")]
+        [field: SerializeField] public TechnologyView TechnologyView { get; private set; }
     }
 }

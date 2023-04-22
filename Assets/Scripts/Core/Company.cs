@@ -1,72 +1,64 @@
 using System;
-using System.Collections.Generic;
 using Core.CPU;
 using Core.Services;
 using Core.Technologies;
+using Utils.CustomNumbers;
 
 namespace Core
 {
     public class Company
     {
-        public event Action<Processor> ActiveProductChanged;
-        public event Action<Technology> ActiveTechnologyChanged;
-        
         public string Name { get; }
-        public double Money { get; private set; }
-        public double ResearchPoints { get; private set; }
-        public double DevelopmentPoints { get; private set; }
-        public List<Technology> Technologies { get; private set; }
+        public CustomNumber<double> Money { get; private set; }
+        public CustomNumber<int> ResearchPoints { get; private set; }
+        public CustomNumber<int> DevelopmentPoints { get; private set; }
 
-        private Processor _activeDevelopingProduct;
-        private Technology _activeResearchingTechnology;
-
-        //TODO now immutable, but should be mutable
         private const int ResearchPointsPrice = 1;
         private const int DevelopmentPointsPrice = 1;
         
         public Company(string name, double money, TickService tickService)
         {
             Name = name;
-            Money = money;
-            
-            tickService.Tick += OnTick;
+            Money = new() {Value = money};
+            ResearchPoints = new() {Value = 0};
+            DevelopmentPoints = new() {Value = 0};
+
+            //TODO turn in on when will be implemented research and development logic
+            //tickService.Tick += OnTick;
         }
-        public void SetResearchPoints(double researchPoints)
+        public void SetResearchPoints(int researchPoints)
         {
             if(researchPoints < 0) 
                 throw new ArgumentException("Research points cannot be negative");
             
-            ResearchPoints = researchPoints;
+            ResearchPoints.Value = researchPoints;
         }
-        public void SetDevelopmentPoints(double developmentPoints)
+        public void SetDevelopmentPoints(int developmentPoints)
         {
             if(developmentPoints < 0) 
                 throw new ArgumentException("Development points cannot be negative");
             
-            DevelopmentPoints = developmentPoints;
+            DevelopmentPoints.Value = developmentPoints;
         }
         public void ResearchTechnology(Technology technology)
         {
-            _activeResearchingTechnology = technology;
-            ActiveTechnologyChanged?.Invoke(technology);
+            technology.Level.AddExperience(100);
         }
         public void DevelopProcessor(Processor processor)
         {
-            _activeDevelopingProduct = processor;
-            ActiveProductChanged?.Invoke(processor);
+            //TODO implement developing processor logic
+        }
+        public int GetResearchPointsPrice()
+        {
+            return ResearchPointsPrice * ResearchPoints.Value;
+        }
+        public int GetDevelopmentPointsPrice()
+        {
+            return DevelopmentPointsPrice * DevelopmentPoints.Value;
         }
 
         private void OnTick()
         {
-            if (_activeDevelopingProduct != null)
-            {
-                //Do progress on developing processor
-            }
-            if(_activeResearchingTechnology != null)
-            {
-                Money -= ResearchPoints * ResearchPointsPrice;
-                _activeResearchingTechnology.Level.AddExperience(ResearchPoints);
-            }
         }
     }
 }

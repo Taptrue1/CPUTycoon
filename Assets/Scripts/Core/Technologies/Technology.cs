@@ -20,7 +20,7 @@ namespace Core.Technologies
         {
             Name = data.Name;
             Description = data.Description;
-            Level = new(data.ResearchCost);
+            Level = new(data.ResearchCost, 0);
             
             _developmentCostProgression = data.DevelopmentCost;
             _powerProgression = data.Power;
