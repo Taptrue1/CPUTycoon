@@ -4,7 +4,6 @@ using Core.GameSpeedStateMachines;
 using Core.GameSpeedStateMachines.States;
 using Cysharp.Threading.Tasks;
 using Settings;
-using UnityEngine;
 using Zenject;
 
 namespace Core.Services
@@ -12,9 +11,6 @@ namespace Core.Services
     public class TickService
     {
         public event Action Tick;
-        
-        //TODO add cancellation token for StartTicking
-        private Coroutine _tickCoroutine;
         
         private readonly GameSpeedStateMachine _gameSpeedStateMachine;
         private const int TickInterval = 1;
@@ -32,6 +28,7 @@ namespace Core.Services
             
             _gameSpeedStateMachine = new(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
             
+            //TODO add cancellation token
             StartTicking().Forget();
         }
         

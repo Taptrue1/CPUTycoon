@@ -8,6 +8,8 @@ namespace Core
 {
     public class Company
     {
+        public event Action<Processor> ProcessorDeveloped;
+        
         public string Name { get; }
         public CustomNumber<double> Money { get; private set; }
         public CustomNumber<int> ResearchPoints { get; private set; }
@@ -46,7 +48,7 @@ namespace Core
         }
         public void DevelopProcessor(Processor processor)
         {
-            //TODO implement developing processor logic
+            ProcessorDeveloped?.Invoke(processor);
         }
         public int GetResearchPointsPrice()
         {
@@ -59,6 +61,7 @@ namespace Core
 
         private void OnTick()
         {
+            
         }
     }
 }

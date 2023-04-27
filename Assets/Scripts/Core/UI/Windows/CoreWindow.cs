@@ -53,7 +53,7 @@ namespace Core.UI.Windows
             _game = game;
             
             _game.OnDateChanged += OnDateChanged;
-            _game.OnMoneyChanged += OnMoneyChanged;
+            _game.Company.Money.Changed += OnMoneyChanged;
             
             OnDateChanged(_game.Date);
             OnMoneyChanged(_game.Company.Money.Value);

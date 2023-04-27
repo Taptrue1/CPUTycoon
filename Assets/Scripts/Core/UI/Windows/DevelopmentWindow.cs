@@ -100,9 +100,9 @@ namespace Core.UI.Windows
 
         #region Callbacks
 
-        private void OnNameInputFieldChanged(string name)
+        private void OnNameInputFieldChanged(string processorName)
         {
-            _processorName = name;
+            _processorName = processorName;
         }
         private void OnPriceInputFieldChanged(string price)
         {
@@ -116,7 +116,8 @@ namespace Core.UI.Windows
                 return;
             }
             
-            var cpu = new Processor(_processorName, _processorPrice, _selectedTechnologies);
+            var processor = new Processor(_processorName, _processorPrice, _selectedTechnologies);
+            _game.Company.DevelopProcessor(processor);
             Debug.Log("Cpu created");
         }
         private void OnExitButtonClicked()

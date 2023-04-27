@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Datas;
+using Core.Markets;
 using Core.Services;
 using Core.Technologies;
 using Settings;
@@ -11,20 +12,19 @@ namespace Core.Games
     public class Game
     {
         public event Action<DateTime> OnDateChanged;
-        public event Action<double> OnMoneyChanged;
 
         public Company Company { get; private set; }
         public List<Technology> Technologies { get; private set; }
-        public DateTime Date;
+        public DateTime Date { get; private set; }
         
         private readonly Market _market;
         
         public Game(TickService tickService, CoreSettings coreSettings)
         {
+            Date = new DateTime(2020, 1, 1);
             Company = new Company("Test", 1000, tickService);
             Technologies = GetTechnologies(coreSettings.TechnologiesSettings.Technologies);
             
-            Date = new DateTime(2020, 1, 1);
             _market = new Market(Company);
 
             tickService.Tick += OnTick;
