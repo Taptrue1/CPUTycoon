@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameSpeedSettings>k__BackingField: {fileID: 11400000, guid: 58bf9f48662539f478093bed4997c845,
     type: 2}
+  <UISettings>k__BackingField: {fileID: 11400000, guid: dba7b6f7e57781847a8bc88f967fc71c,
+    type: 2}
   <TechnologiesSettings>k__BackingField: {fileID: 11400000, guid: 8aaaf4036fff4bd4cb40b9c626480d93,
     type: 2}
-  <UISettings>k__BackingField: {fileID: 11400000, guid: dba7b6f7e57781847a8bc88f967fc71c,
+  <MarketSettings>k__BackingField: {fileID: 11400000, guid: d3149d528660ff441bd04f2d9a6b05cf,
     type: 2}

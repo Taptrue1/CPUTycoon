@@ -106,6 +106,7 @@ namespace Core.UI.Windows
         }
         private void OnPriceInputFieldChanged(string price)
         {
+            if(price.Length < 1) return;
             _processorPrice = double.Parse(price);
         }
         private void OnDevelopButtonClicked()

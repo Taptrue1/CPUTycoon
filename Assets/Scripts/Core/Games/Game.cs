@@ -25,25 +25,34 @@ namespace Core.Games
             Company = new Company("Test", 1000, tickService);
             Technologies = GetTechnologies(coreSettings.TechnologiesSettings.Technologies);
             
-            _market = new Market(Company);
+            _market = new Market(Date, Company, coreSettings.MarketSettings);
 
             tickService.Tick += OnTick;
         }
 
+        #region TickMethods
+        
         private void OnTick()
         {
             UpdateDate();
+            
+            _market.Tick(Date);
         }
-
         private void UpdateDate()
         {
             Date = Date.AddDays(1);
             OnDateChanged?.Invoke(Date);
         }
         
+        #endregion
+        
+        #region Other
+        
         private List<Technology> GetTechnologies(IEnumerable<TechnologyData> technologiesData)
         {
             return technologiesData.Select(technologyData => new Technology(technologyData)).ToList();
         }
+        
+        #endregion
     }
 }
