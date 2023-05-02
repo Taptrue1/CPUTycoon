@@ -8,8 +8,9 @@ namespace Core.Datas
     {
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
-        [field: SerializeField] public Progression ResearchCost { get; private set; }
-        [field: SerializeField] public Progression DevelopmentCost { get; private set; }
-        [field: SerializeField] public Progression Power { get; private set; }
+        [field: SerializeField] public int Power { get; private set; }
+        [field: SerializeField] public int ImplementPrice { get; private set; }
+        [field: SerializeField] public int ResearchPointsPrice { get; private set; }
+        [field: SerializeField] public int DevelopmentPointsPrice { get; private set; }
     }
 }

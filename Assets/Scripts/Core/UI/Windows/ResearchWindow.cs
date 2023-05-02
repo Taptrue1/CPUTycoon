@@ -72,7 +72,7 @@ namespace Core.UI.Windows
         {
             var resultValue = Mathf.CeilToInt(value);
             
-            _game.Company.SetResearchPoints(resultValue);
+            _game.Company.ResearchPoints.Value = resultValue;
             _researchPointsSlider.value = resultValue;
             
             UpdateText(_researchPointsTextObject, string.Format(_researchPointsTextFormat, resultValue));
@@ -85,11 +85,12 @@ namespace Core.UI.Windows
         
         #endregion
 
+        #region Other
+
         private void UpdateText(TextMeshProUGUI textObject, string value)
         {
             textObject.text = value;
         }
-
         private void SelectTechnology(Technology technology)
         {
             foreach (var techView in _technologyViews)
@@ -110,5 +111,7 @@ namespace Core.UI.Windows
             }
             return technologyViews;
         }
+
+        #endregion
     }
 }

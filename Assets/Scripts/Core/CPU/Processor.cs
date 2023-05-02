@@ -7,20 +7,18 @@ namespace Core.CPU
     public class Processor
     {
         public string Name { get; }
-        public double Price { get; }
-        public double Power { get; }
-        public double DevelopmentCost { get; }
+        public int Power { get; }
+        public int SellPrice { get; }
+        public int ImplementPrice { get; }
+        public int DevelopmentPointsPrice { get; }
 
-        private readonly List<Technology> _technologies;
-
-        public Processor(string name, double price, List<Technology> technologies)
+        public Processor(string name, int sellPrice, List<Technology> technologies)
         {
             Name = name;
-            Price = price;
+            SellPrice = sellPrice;
             Power = technologies.Sum(technology => technology.Power);
-            DevelopmentCost = technologies.Sum(technology => technology.DevelopmentCost);
-            
-            _technologies = technologies;
+            ImplementPrice = technologies.Sum(technology => technology.ImplementPrice);
+            DevelopmentPointsPrice = technologies.Sum(technology => technology.ImplementPrice);
         }
     }
 }

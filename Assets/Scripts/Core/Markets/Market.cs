@@ -32,7 +32,7 @@ namespace Core.Markets
 
             var daysPassed = (currentDate - _startDate).Days;
             var clientsPerDay = _marketSettings.ClientsCount / 365;
-            var playerProductCoeffs = _currentPlayerProcessor.Power / _currentPlayerProcessor.Price;
+            var playerProductCoeffs = _currentPlayerProcessor.Power / _currentPlayerProcessor.SellPrice;
             var activeProductsCoeffs =
                 (from company in _marketSettings.Competitors
                     from product in company.ProductReleases

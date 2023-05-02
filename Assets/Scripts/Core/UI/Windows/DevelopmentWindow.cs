@@ -40,7 +40,7 @@ namespace Core.UI.Windows
         private List<TechnologyView> _technologyViews;
 
         private string _processorName;
-        private double _processorPrice;
+        private int _processorPrice;
 
         private void Awake()
         {
@@ -107,7 +107,7 @@ namespace Core.UI.Windows
         private void OnPriceInputFieldChanged(string price)
         {
             if(price.Length < 1) return;
-            _processorPrice = double.Parse(price);
+            _processorPrice = int.Parse(price);
         }
         private void OnDevelopButtonClicked()
         {
@@ -144,7 +144,7 @@ namespace Core.UI.Windows
         }
         private void UpdatePriceText()
         {
-            var totalPrice = _selectedTechnologies.Sum(tech => tech.DevelopmentCost);
+            var totalPrice = _selectedTechnologies.Sum(tech => tech.DevelopmentPointsPrice);
             _priceTextObject.text = string.Format(_priceTextFormat, totalPrice);
         }
         private void ActivateTechnologiesView()
