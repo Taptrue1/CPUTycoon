@@ -10,43 +10,41 @@ namespace Core.UI.Views
     public class TechnologyView : MonoBehaviour
     {
         public event Action<Technology> Selected;
-        
         public Technology Technology => _technology;
 
         [SerializeField] private TextMeshProUGUI _nameTextObject;
-        [SerializeField] private TextMeshProUGUI _levelTextObject;
         [SerializeField] private Color _selectedColor;
         [SerializeField] private Color _unselectedColor;
 
+        private bool _isInited;
         private Button _button;
         private Technology _technology;
-
-        private void Awake()
-        {
-            _button = GetComponent<Button>();
-            _button.onClick.AddListener(OnButtonClicked);
-        }
         
-        public void SetTechnology(Technology technology)
+        public void Init(Technology technology)
         {
+            if(_isInited) throw new Exception("Try to init already inited TechnologyView");
+            
+            _isInited = true;
             _technology = technology;
             _nameTextObject.text = technology.Name;
-            _levelTextObject.text = technology.Level.Value.ToString();
-
-            _technology.Level.Changed += OnTechnologyLevelChanged;
+            _button = GetComponent<Button>();
+            _button.onClick.AddListener(OnButtonClicked);
+            
+            if (_technology.IsResearched()) 
+                SetResearched();
         }
         public void SetSelected(bool isSelected)
         {
             _button.image.color = isSelected ? _selectedColor : _unselectedColor;
         }
+        public void SetResearched()
+        {
+            _button.interactable = false;
+        }
 
         private void OnButtonClicked()
         {
             Selected?.Invoke(_technology);
-        }
-        private void OnTechnologyLevelChanged()
-        {
-            _levelTextObject.text = _technology.Level.Value.ToString();
         }
     }
 }

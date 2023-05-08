@@ -16,7 +16,8 @@ MonoBehaviour:
     type: 2}
   <UISettings>k__BackingField: {fileID: 11400000, guid: dba7b6f7e57781847a8bc88f967fc71c,
     type: 2}
-  <TechnologiesSettings>k__BackingField: {fileID: 11400000, guid: 8aaaf4036fff4bd4cb40b9c626480d93,
-    type: 2}
   <MarketSettings>k__BackingField: {fileID: 11400000, guid: d3149d528660ff441bd04f2d9a6b05cf,
     type: 2}
+  <CurrencySettings>k__BackingField: {fileID: 11400000, guid: 35c3c014ba0858a42ae731accd9d1546,
+    type: 2}
+  <TechTreePath>k__BackingField: Assets/Data/TechTree.json

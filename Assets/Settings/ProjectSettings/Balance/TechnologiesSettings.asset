@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add4f9e04a2e472facc75e398c9c1bde, type: 3}
+  m_Name: TechnologiesSettings
+  m_EditorClassIdentifier: 
+  <TechProcesses>k__BackingField:
+  - <TechProcess>k__BackingField: 1
+    <MesureUnit>k__BackingField: 0
+  <Frequencies>k__BackingField:
+  - <Frequency>k__BackingField: 1
+    <MesureUnit>k__BackingField: 0
+  <FormFactors>k__BackingField:
+  - <FormFactorName>k__BackingField: 
+    <DevelopmentPointsPrice>k__BackingField: 0
+    <ImplementPrice>k__BackingField: 0
+  <Ram>k__BackingField:
+  - <Ram>k__BackingField: 1
+    <MesureUnit>k__BackingField: 0
+  <Bits>k__BackingField: 00000000

@@ -3,27 +3,28 @@ using System.Linq;
 using Core.CPU;
 using Settings;
 using UnityEngine;
+using Zenject;
 
-namespace Core.Markets
+namespace Core.Services
 {
     /// <summary>
     /// Market manages all the companies and their incomes, fans and so on.
     /// </summary>
-    public class Market
+    public class MarketService
     {
+        //TODO remake all class to service
         private Processor _currentPlayerProcessor;
         
         private readonly DateTime _startDate;
-        private readonly Company _playerCompany;
         private readonly MarketSettings _marketSettings;
         
-        public Market(DateTime startDate, Company playerCompany, MarketSettings marketSettings)
+        [Inject]
+        public MarketService(CoreSettings coreSettings)
         {
-            _startDate = startDate;
-            _playerCompany = playerCompany;
-            _marketSettings = marketSettings;
+            _startDate = DateTime.Now; //TODO change it to start date
+            _marketSettings = coreSettings.MarketSettings;
             
-            _playerCompany.ProcessorDeveloped += OnPlayerProcessorDeveloped;
+            //_playerCompany.ProcessorDeveloped += OnPlayerProcessorDeveloped;
         }
 
         public void Tick(DateTime currentDate)
@@ -41,7 +42,7 @@ namespace Core.Markets
             var totalProductsCoeffs = activeProductsCoeffs.Sum() + playerProductCoeffs;
             var playerIncome = Math.Round((playerProductCoeffs / totalProductsCoeffs) * clientsPerDay);
 
-            _playerCompany.Money.Value += playerIncome;
+            //_playerCompany.Money.Value += playerIncome;
             Debug.Log(playerProductCoeffs / totalProductsCoeffs);
             Debug.Log($"Player income today is {playerIncome}");
         }

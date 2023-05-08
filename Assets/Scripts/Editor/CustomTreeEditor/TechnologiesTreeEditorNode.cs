@@ -1,5 +1,6 @@
 using System;
 using Core.Datas;
+using Core.Technologies;
 using Editor.CustomTreeEditor.Connections;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Editor.CustomTreeEditor
     {
         public string Title { get; private set; }
         public Rect Rect => _rect;
-        public TechnologyNodeData DataNode { get; }
+        public Technology DataNode { get; }
         public ConnectionPoint InPoint { get => _inPoint; }
         public ConnectionPoint OutPoint { get => _outPoint; }
 
@@ -25,7 +26,7 @@ namespace Editor.CustomTreeEditor
         private Action<TechnologiesTreeEditorNode> _onSelectNode;
         private Action<TechnologiesTreeEditorNode> _onRemoveNode;
 
-        public TechnologiesTreeEditorNode(TechnologyNodeData node, Vector2 position, float width, float height,
+        public TechnologiesTreeEditorNode(Technology node, Vector2 position, float width, float height,
             GUIStyle nodeStyle, GUIStyle nodeSelectedStyle, GUIStyle connectionStyle,
             Action<ConnectionPoint> onClickInPoint, Action<ConnectionPoint> onClickOutPoint,
             Action<TechnologiesTreeEditorNode> onClickSelectNode, Action<TechnologiesTreeEditorNode> onClickRemoveNode)

@@ -8,15 +8,18 @@ using Zenject;
 
 namespace Core.Services
 {
-    public class TickService
+    public class TimeService
     {
         public event Action Tick;
+        public event Action<DateTime> DateTimeChanged;
+        public DateTime CurrentDateTime => _currentDateTime;
         
+        private DateTime _currentDateTime;
         private readonly GameSpeedStateMachine _gameSpeedStateMachine;
         private const int TickInterval = 1;
 
         [Inject]
-        public TickService(CoreSettings coreSettings)
+        public TimeService(CoreSettings coreSettings)
         {
             var gameSpeedStates = new Dictionary<Type, IGameSpeedState>()
             {
@@ -27,6 +30,7 @@ namespace Core.Services
             };
             
             _gameSpeedStateMachine = new(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
+            _currentDateTime = DateTime.Now; //TODO add date save/load and default date constant
             
             //TODO add cancellation token
             StartTicking().Forget();
@@ -42,6 +46,8 @@ namespace Core.Services
             while (true)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(TickInterval));
+                _currentDateTime = _currentDateTime.AddDays(TickInterval);
+                DateTimeChanged?.Invoke(_currentDateTime);
                 Tick?.Invoke();
             }
         }

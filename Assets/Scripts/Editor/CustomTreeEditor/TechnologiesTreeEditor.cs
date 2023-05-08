@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using Core.Datas;
+using Core.Technologies;
 using Editor.CustomTreeEditor.Connections;
 using UnityEditor;
 using UnityEngine;
@@ -34,7 +35,7 @@ namespace Editor.CustomTreeEditor
         private ConnectionPoint _selectedOutPoint;
         private List<Connection> _connections;
 
-        private TechnologyNodeData _rootNode;
+        private Technology _rootNode;
         private List<TechnologiesTreeEditorNode> _editorNodes;
         
         private const int SidePanelHeightOffset = 20;
@@ -136,16 +137,16 @@ namespace Editor.CustomTreeEditor
             var paddingX = (_sidePanelWidthRatio * position.width) + 50f;
             var nodeXSpacing = _nodeWidth + offsetX * 2;
             var nodeYSpacing = _nodeHeight + offsetY * 2;
-            var currentNodes = new List<TechnologyNodeData> {_rootNode};
+            var currentNodes = new List<Technology> {_rootNode};
             var nodesMapping = new Dictionary<string, TechnologiesTreeEditorNode>();
-            var edges = new List<(TechnologyNodeData, TechnologyNodeData)>();
+            var edges = new List<(Technology, Technology)>();
 
             _editorNodes = new List<TechnologiesTreeEditorNode>();
             _newNodeLastIndex = 0;
 
             while (currentNodes.Count > 0)
             {
-                var newNodes = new List<TechnologyNodeData>();
+                var newNodes = new List<Technology>();
                 foreach (var node in currentNodes)
                 {
                     var editorNode = new TechnologiesTreeEditorNode(
@@ -243,7 +244,6 @@ namespace Editor.CustomTreeEditor
                     if (field.IsStatic) continue;
                     if (field.Name == "Children") continue;
                     
-                    
                     switch (field.GetValue(node))
                     {
                         case int intValue:
@@ -255,6 +255,11 @@ namespace Editor.CustomTreeEditor
                             var newStringValue = EditorGUILayout.TextField(field.Name, stringValue);
                             if(newStringValue != stringValue)
                                 field.SetValue(node, newStringValue);
+                            break;
+                        case TechnologyType type:
+                            var newTypeValue = (TechnologyType) EditorGUILayout.EnumPopup(field.Name, type);
+                            if(newTypeValue != type)
+                                field.SetValue(node, newTypeValue);
                             break;
                         default:
                             EditorGUILayout.LabelField(field.Name, "Unsupported field type");
@@ -329,7 +334,7 @@ namespace Editor.CustomTreeEditor
 
             var formatter = new BinaryFormatter();
             var stream = new FileStream(path, FileMode.Open);
-            var rootNode = (TechnologyNodeData)formatter.Deserialize(stream);
+            var rootNode = (Technology)formatter.Deserialize(stream);
 
             stream.Close();
 
@@ -345,7 +350,7 @@ namespace Editor.CustomTreeEditor
             if(_rootNode != null) SaveTree();
             
             var path = EditorUtility.SaveFilePanel("Создать файл", Application.dataPath, "NewTree", "json");
-            var rootNode = new TechnologyNodeData("ROOT") { Children = new()
+            var rootNode = new Technology("ROOT") { Children = new()
             {
                 new("TestNode1"), 
                 new("TestNode2")
@@ -497,7 +502,7 @@ namespace Editor.CustomTreeEditor
         private void OnClickAddNode(Vector2 mousePosition)
         {
             var name = $"Untitled_{_newNodeLastIndex:00}";
-            var node = new TechnologyNodeData(name);
+            var node = new Technology(name);
             
             _newNodeLastIndex++;
             _editorNodes.Add(new TechnologiesTreeEditorNode(

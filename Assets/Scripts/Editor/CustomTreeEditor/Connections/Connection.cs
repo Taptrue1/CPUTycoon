@@ -1,5 +1,6 @@
 using System;
 using Core.Datas;
+using Core.Technologies;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,16 +11,16 @@ namespace Editor.CustomTreeEditor.Connections
         public ConnectionPoint InPoint { get => _inPoint; }
         public ConnectionPoint OutPoint { get => _outPoint; }
         public Action<Connection> OnClickRemoveConnection { get => _onClickRemoveConnection; }
-        public TechnologyNodeData Source { get => _source; }
-        public TechnologyNodeData Target { get => _target; }
+        public Technology Source { get => _source; }
+        public Technology Target { get => _target; }
         
         private ConnectionPoint _inPoint;
         private ConnectionPoint _outPoint;
         private Action<Connection> _onClickRemoveConnection;
-        private TechnologyNodeData _source;
-        private TechnologyNodeData _target;
+        private Technology _source;
+        private Technology _target;
 
-        public Connection(TechnologyNodeData source, TechnologyNodeData target, ConnectionPoint inPoint,
+        public Connection(Technology source, Technology target, ConnectionPoint inPoint,
             ConnectionPoint outPoint, Action<Connection> onClickRemoveConnection)
         {
             _source = source;

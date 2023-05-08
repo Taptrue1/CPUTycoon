@@ -1,31 +1,31 @@
-using Core.Datas;
-using Utils;
+using System;
+using System.Collections.Generic;
 
 namespace Core.Technologies
 {
+    [Serializable]
     public class Technology
     {
-        public string Name { get; }
-        public string Description { get; }
-        public int Power { get; }
-        public int ImplementPrice { get; }
-        public int ResearchPointsPrice { get; }
-        public int DevelopmentPointsPrice { get; }
-        public bool IsResearched { get; }
+        public string Name;
+        public int ResearchPrice;
+        public int TypeValue;
+        public TechnologyType Type;
+        public List<Technology> Children;
         
-        //TODO delete this
-        public Level Level { get; private set; }
-        
-        //private Progress _progress;
+        private bool _isResearched;
 
-        public Technology(TechnologyData data)
+        public Technology(string name)
         {
-            Name = data.Name;
-            Description = data.Description;
-            Power = data.Power;
-            ImplementPrice = data.ImplementPrice;
-            ResearchPointsPrice = data.ResearchPointsPrice;
-            DevelopmentPointsPrice = data.DevelopmentPointsPrice;
+            Name = name;
+            Children = new List<Technology>();
+        }
+        public void Research()
+        {
+            _isResearched = true;
+        }
+        public bool IsResearched()
+        {
+            return Name == "ROOT" || _isResearched;
         }
     }
 }

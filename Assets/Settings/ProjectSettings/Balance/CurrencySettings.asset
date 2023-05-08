@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7acabbb4ac4898b06dd9c77907f2f9, type: 3}
+  m_Name: CurrencySettings
+  m_EditorClassIdentifier: 
+  <CurrenciesDatas>k__BackingField:
+  - {fileID: 11400000, guid: 11d7f1bc579a77e4e852008059ddaea0, type: 2}
+  - {fileID: 11400000, guid: 8a4cb5332ccad564392181ae63974a91, type: 2}
+  - {fileID: 11400000, guid: 4b12c35c022e0304eaa531751708f17e, type: 2}

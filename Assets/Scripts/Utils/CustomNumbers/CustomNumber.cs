@@ -27,6 +27,11 @@ namespace Utils.CustomNumbers
         
         private T _value;
         private Action _internalChanged;
+        
+        public CustomNumber(T value)
+        {
+            _value = value;
+        }
 
         public string GetFormatedString(string format)
         {

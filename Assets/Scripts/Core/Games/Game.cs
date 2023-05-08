@@ -1,59 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core.Datas;
-using Core.Markets;
 using Core.Services;
-using Core.Technologies;
-using Settings;
+using Zenject;
 
 namespace Core.Games
 {
     public class Game
     {
-        public event Action<DateTime> OnDateChanged;
-
-        public Company Company { get; private set; }
-        public DateTime Date { get; private set; }
-        public List<Technology> Technologies { get; private set; }
-
-        private readonly Market _market;
+        public int RPPerDay { get; set; }
+        public int DPPerDay { get; set; }
+        public int RPPrice => RPPerDay * 10;
+        public int DPPrice => DPPrice * 10;
         
-        public Game(TickService tickService, CoreSettings coreSettings)
+        private readonly CurrencyService _currencyService;
+        
+        [Inject]
+        public Game(CurrencyService currencyService, TimeService timeService)
         {
-            Date = new DateTime(2020, 1, 1);
-            Company = new Company("Test", 1000);
-            Technologies = GetTechnologies(coreSettings.TechnologiesSettings.Technologies);
-            
-            _market = new Market(Date, Company, coreSettings.MarketSettings);
+            _currencyService = currencyService;
 
-            tickService.Tick += OnTick;
+            timeService.Tick += OnTick;
         }
 
         #region TickMethods
         
         private void OnTick()
         {
-            UpdateDate();
+            _currencyService.GetCurrency("RP").Value += RPPerDay;
+            _currencyService.GetCurrency("DP").Value += DPPerDay;
+        }
 
-            Company.Tick();
-            _market.Tick(Date);
-        }
-        private void UpdateDate()
-        {
-            Date = Date.AddDays(1);
-            OnDateChanged?.Invoke(Date);
-        }
-        
-        #endregion
-        
-        #region Other
-        
-        private List<Technology> GetTechnologies(IEnumerable<TechnologyData> technologiesData)
-        {
-            return technologiesData.Select(technologyData => new Technology(technologyData)).ToList();
-        }
-        
         #endregion
     }
 }

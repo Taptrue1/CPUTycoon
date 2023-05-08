@@ -30,9 +30,8 @@ namespace Core.UI.Windows
         [SerializeField] private TextMeshProUGUI _companyNameTextObject;
         [SerializeField] private TextMeshProUGUI _moneyTextObject;
         
-        private TickService _tickService;
+        private TimeService _timeService;
         private UIService _uiService;
-        private Game _game;
 
         private void Awake()
         {
@@ -46,37 +45,43 @@ namespace Core.UI.Windows
         }
 
         [Inject]
-        public void InjectDependencies(TickService tickService, UIService uiService, Game game)
+        public void InjectDependencies(TimeService timeService, UIService uiService)
         {
-            _tickService = tickService;
+            _timeService = timeService;
             _uiService = uiService;
-            _game = game;
             
-            _game.OnDateChanged += OnDateChanged;
-            _game.Company.Money.Changed += OnMoneyChanged;
+            _timeService.DateTimeChanged += OnDateChanged;
             
-            OnDateChanged(_game.Date);
-            OnMoneyChanged(_game.Company.Money.Value);
-            UpdateCompanyNameText();
+            OnDateChanged(_timeService.CurrentDateTime);
+        }
+        public override void Show()
+        {
+            base.Show();
+            _timeService.ChangeGameSpeedState<NormalGameSpeedState>();
+        }
+        public override void Hide()
+        {
+            base.Hide();
+            _timeService.ChangeGameSpeedState<PauseGameSpeedState>();
         }
         
         #region GameSpeedCallbacks
         
         private void OnPauseButtonClicked()
         {
-            _tickService.ChangeGameSpeedState<PauseGameSpeedState>();
+            _timeService.ChangeGameSpeedState<PauseGameSpeedState>();
         }
         private void OnNormalSpeedButtonClicked()
         {
-            _tickService.ChangeGameSpeedState<NormalGameSpeedState>();
+            _timeService.ChangeGameSpeedState<NormalGameSpeedState>();
         }
         private void OnFastSpeedButtonClicked()
         {
-            _tickService.ChangeGameSpeedState<FastGameSpeedState>();
+            _timeService.ChangeGameSpeedState<FastGameSpeedState>();
         }
         private void OnFastestSpeedButtonClicked()
         {
-            _tickService.ChangeGameSpeedState<FastestGameSpeedState>();
+            _timeService.ChangeGameSpeedState<FastestGameSpeedState>();
         }
         
         #endregion
@@ -106,10 +111,5 @@ namespace Core.UI.Windows
         }
         
         #endregion
-        
-        private void UpdateCompanyNameText()
-        {
-            _companyNameTextObject.text = string.Format(_companyNameTextFormat, _game.Company.Name);
-        }
     }
 }
