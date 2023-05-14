@@ -2830,3 +2830,4 @@ MonoBehaviour:
   _dateTextObject: {fileID: 426486049100355543}
   _companyNameTextObject: {fileID: 426486049086864926}
   _moneyTextObject: {fileID: 8681167712646946712}
+  _moneyCurrencyData: {fileID: 11400000, guid: 11d7f1bc579a77e4e852008059ddaea0, type: 2}

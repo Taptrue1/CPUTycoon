@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Datas;
 using Core.Games;
 using Core.Services;
 using Core.Technologies;
 using Core.UI.Views;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,24 +17,13 @@ namespace Core.UI.Windows
         [SerializeField] private int _yOffset;
         [SerializeField] private int _xOffset;
         [SerializeField] private RectTransform _technologiesContainer;
-        [SerializeField] private CurrencyData _researchPointsCurrencyData;
-
-        [Header("Texts")]
-        [SerializeField] private string _totalRPTextFormat = "{0}";
-        [SerializeField] private string _rpPerDayTextFormat = "{0}/day";
-        [SerializeField] private string _rpPerDayPriceTextFormat = "{0}/day";
-        [SerializeField] private TextMeshProUGUI _totalRPTextObject;
-        [SerializeField] private TextMeshProUGUI _rpPerDayTextObject;
-        [SerializeField] private TextMeshProUGUI _rpPerDayPriceTextObject;
 
         [Header("Other")]
-        [SerializeField] private Slider _researchPointsSlider;
         [SerializeField] private Button _exitButton;
 
         private Game _game;
         private UIService _uiService;
         private UIFactory _uiFactory;
-        private CurrencyService _currencyService;
         private Technology _techTreeRootNode;
         
         private Technology _selectedTechnology;
@@ -44,31 +31,25 @@ namespace Core.UI.Windows
 
         private void Awake()
         {
-            //TODO Change this to get from Company max and min values
-            _researchPointsSlider.minValue = 1;
-            _researchPointsSlider.maxValue = 100;
-
-            _researchPointsSlider.onValueChanged.AddListener(OnSliderValueChanged);
             _exitButton.onClick.AddListener(OnExitButtonClicked);
         }
-       
+
         [Inject]
         public void InjectDependencies(Game game, UIService uiService, UIFactory uiFactory,
-            CurrencyService currencyService, Technology techTreeRootNode)
+            Technology techTreeRootNode)
         {
             _game = game;
             _uiService = uiService;
             _uiFactory = uiFactory;
-            _currencyService = currencyService;
             _techTreeRootNode = techTreeRootNode;
             _technologyViews = new List<TechnologyView>();
-
-            var rpCurrency = _currencyService.GetCurrency(_researchPointsCurrencyData.Name);
-            rpCurrency.Changed += OnResearchPointsChanged;
             
-            OnSliderValueChanged(1);
-            OnResearchPointsChanged(rpCurrency.Value);
             SetupTechTreeView();
+        }
+        public override void Show()
+        {
+            base.Show();
+            UpdateViews();
         }
         
         #region TechTreeSetup
@@ -133,32 +114,15 @@ namespace Core.UI.Windows
         
         #region Callbacks
         
-        private void OnSliderValueChanged(float value)
-        {
-            var resultValue = Mathf.RoundToInt(value);
-            
-            _game.RPPerDay = resultValue;
-            
-            UpdateText(_rpPerDayTextObject, string.Format(_rpPerDayTextFormat, _game.RPPerDay));
-            UpdateText(_rpPerDayPriceTextObject, string.Format(_rpPerDayPriceTextFormat, _game.RPPrice));
-        }
         private void OnTechnologySelected(Technology technology)
         {
             var referenceNodes = FindReferencingNodes(technology);
             var canResearch = referenceNodes.All(obj => obj.IsResearched());
+            var technologyToResearch = canResearch ? technology : FindTechnologyToResearch(technology);
             
-            _selectedTechnology = canResearch ? technology : FindTechnologyToResearch(technology);
-
-            UpdateViewsSelection();
-            OnResearchPointsChanged(_currencyService.GetCurrency(_researchPointsCurrencyData.Name).Value);
-        }
-        private void OnResearchPointsChanged(int value)
-        {
-            var canResearch = _selectedTechnology != null && value >= _selectedTechnology.ResearchPrice;
-            if (canResearch)
-                ResearchTechnology(_selectedTechnology);
-
-            UpdateText(_totalRPTextObject, string.Format(_totalRPTextFormat, value));
+            _game.SetTechnologyToResearch(technologyToResearch);
+            
+            UpdateViews();
         }
         private void OnExitButtonClicked()
         {
@@ -169,23 +133,10 @@ namespace Core.UI.Windows
 
         #region Other
 
-        private void UpdateViewsSelection()
+        private void UpdateViews()
         {
             foreach(var view in _technologyViews)
-                view.SetSelected(false);
-            _technologyViews.Find(view => view.Technology == _selectedTechnology).SetSelected(true);
-        }
-        private void ResearchTechnology(Technology technology)
-        {
-            var view = _technologyViews.Find(view => view.Technology == technology);
-            technology.Research();
-            view.SetResearched();
-            view.SetSelected(false);
-            _currencyService.GetCurrency(_researchPointsCurrencyData.Name).Value -= technology.ResearchPrice;
-        }
-        private void UpdateText(TextMeshProUGUI textObject, string value)
-        {
-            textObject.text = value;
+                view.UpdateView(_game.TechnologyToResearch);
         }
         private Technology FindTechnologyToResearch(Technology selectedNode)
         {

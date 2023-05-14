@@ -1,5 +1,5 @@
 using System;
-using Core.Games;
+using Core.Datas;
 using Core.GameSpeedStateMachines.States;
 using Core.Services;
 using TMPro;
@@ -29,9 +29,13 @@ namespace Core.UI.Windows
         [SerializeField] private TextMeshProUGUI _dateTextObject;
         [SerializeField] private TextMeshProUGUI _companyNameTextObject;
         [SerializeField] private TextMeshProUGUI _moneyTextObject;
+
+        [Header("Other")]
+        [SerializeField] private CurrencyData _moneyCurrencyData;
         
         private TimeService _timeService;
         private UIService _uiService;
+        private CurrencyService _currencyService;
 
         private void Awake()
         {
@@ -45,43 +49,48 @@ namespace Core.UI.Windows
         }
 
         [Inject]
-        public void InjectDependencies(TimeService timeService, UIService uiService)
+        public void InjectDependencies(TimeService timeService, UIService uiService, CurrencyService currencyService)
         {
             _timeService = timeService;
             _uiService = uiService;
+            _currencyService = currencyService;
             
             _timeService.DateTimeChanged += OnDateChanged;
             
+            var money = _currencyService.GetCurrency(_moneyCurrencyData.Name);
+            money.Changed += OnMoneyChanged;
+            
+            OnMoneyChanged(money.Value);
             OnDateChanged(_timeService.CurrentDateTime);
         }
         public override void Show()
         {
             base.Show();
-            _timeService.ChangeGameSpeedState<NormalGameSpeedState>();
+            _timeService.SetLastGameSpeedState();
         }
         public override void Hide()
         {
             base.Hide();
-            _timeService.ChangeGameSpeedState<PauseGameSpeedState>();
+            _timeService.SetGameSpeedState<PauseGameSpeedState>();
         }
         
         #region GameSpeedCallbacks
         
         private void OnPauseButtonClicked()
         {
-            _timeService.ChangeGameSpeedState<PauseGameSpeedState>();
+            _timeService.SetGameSpeedState<PauseGameSpeedState>();
         }
         private void OnNormalSpeedButtonClicked()
         {
-            _timeService.ChangeGameSpeedState<NormalGameSpeedState>();
+            _timeService.SetGameSpeedState<NormalGameSpeedState>();
         }
         private void OnFastSpeedButtonClicked()
         {
-            _timeService.ChangeGameSpeedState<FastGameSpeedState>();
+            _timeService.SetGameSpeedState<FastGameSpeedState>();
         }
         private void OnFastestSpeedButtonClicked()
         {
-            _timeService.ChangeGameSpeedState<FastestGameSpeedState>();
+            _timeService.SetGameSpeedState<FastestGameSpeedState>();
         }
         
         #endregion
@@ -105,7 +114,7 @@ namespace Core.UI.Windows
         {
             _dateTextObject.text = date.ToString(_dateTextFormat);
         }
-        private void OnMoneyChanged(double money)
+        private void OnMoneyChanged(int money)
         {
             _moneyTextObject.text = string.Format(_moneyTextFormat, money);
         }

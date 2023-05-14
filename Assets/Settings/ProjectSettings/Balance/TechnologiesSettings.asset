@@ -13,16 +13,34 @@ MonoBehaviour:
   m_Name: TechnologiesSettings
   m_EditorClassIdentifier: 
   <TechProcesses>k__BackingField:
+  - <TechProcess>k__BackingField: 10
+    <MesureUnit>k__BackingField: 0
   - <TechProcess>k__BackingField: 1
     <MesureUnit>k__BackingField: 0
+  - <TechProcess>k__BackingField: 400
+    <MesureUnit>k__BackingField: 1
   <Frequencies>k__BackingField:
   - <Frequency>k__BackingField: 1
-    <MesureUnit>k__BackingField: 0
+    <MesureUnit>k__BackingField: 1
+  - <Frequency>k__BackingField: 100
+    <MesureUnit>k__BackingField: 1
+  - <Frequency>k__BackingField: 1
+    <MesureUnit>k__BackingField: 2
   <FormFactors>k__BackingField:
-  - <FormFactorName>k__BackingField: 
-    <DevelopmentPointsPrice>k__BackingField: 0
-    <ImplementPrice>k__BackingField: 0
+  - <FormFactorName>k__BackingField: DPI14
+    <DevelopmentPointsPrice>k__BackingField: 100
+    <ImplementPrice>k__BackingField: 1000
+  - <FormFactorName>k__BackingField: DPI32
+    <DevelopmentPointsPrice>k__BackingField: 100
+    <ImplementPrice>k__BackingField: 2000
+  - <FormFactorName>k__BackingField: DPI64
+    <DevelopmentPointsPrice>k__BackingField: 100
+    <ImplementPrice>k__BackingField: 3000
   <Ram>k__BackingField:
-  - <Ram>k__BackingField: 1
-    <MesureUnit>k__BackingField: 0
-  <Bits>k__BackingField: 00000000
+  - <Ram>k__BackingField: 32
+    <MesureUnit>k__BackingField: 1
+  - <Ram>k__BackingField: 128
+    <MesureUnit>k__BackingField: 1
+  - <Ram>k__BackingField: 256
+    <MesureUnit>k__BackingField: 1
+  <Bits>k__BackingField: 08000000100000002000000040000000

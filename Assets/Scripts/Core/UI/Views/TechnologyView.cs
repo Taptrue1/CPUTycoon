@@ -10,7 +10,6 @@ namespace Core.UI.Views
     public class TechnologyView : MonoBehaviour
     {
         public event Action<Technology> Selected;
-        public Technology Technology => _technology;
 
         [SerializeField] private TextMeshProUGUI _nameTextObject;
         [SerializeField] private Color _selectedColor;
@@ -33,18 +32,25 @@ namespace Core.UI.Views
             if (_technology.IsResearched()) 
                 SetResearched();
         }
-        public void SetSelected(bool isSelected)
+        public void UpdateView(Technology selectedTechnology)
         {
-            _button.image.color = isSelected ? _selectedColor : _unselectedColor;
-        }
-        public void SetResearched()
-        {
-            _button.interactable = false;
+            SetSelected(_technology == selectedTechnology);
+            if (_technology.IsResearched())
+                SetResearched();
         }
 
         private void OnButtonClicked()
         {
             Selected?.Invoke(_technology);
+        }
+        
+        private void SetSelected(bool isSelected)
+        {
+            _button.image.color = isSelected ? _selectedColor : _unselectedColor;
+        }
+        private void SetResearched()
+        {
+            _button.interactable = false;
         }
     }
 }

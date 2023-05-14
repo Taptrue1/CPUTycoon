@@ -29,6 +29,7 @@ namespace Core.Services
 
         public void Tick(DateTime currentDate)
         {
+            /*
             if(_currentPlayerProcessor == null) return;
 
             var daysPassed = (currentDate - _startDate).Days;
@@ -45,6 +46,7 @@ namespace Core.Services
             //_playerCompany.Money.Value += playerIncome;
             Debug.Log(playerProductCoeffs / totalProductsCoeffs);
             Debug.Log($"Player income today is {playerIncome}");
+            */
         }
         
         private void OnPlayerProcessorDeveloped(Processor processor)

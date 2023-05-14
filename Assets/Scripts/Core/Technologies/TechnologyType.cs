@@ -9,6 +9,7 @@ namespace Core.Technologies
         Ram,
         Bitness,
         Architecture,
-        InstructionSet
+        InstructionSet,
+        Separate
     }
 }

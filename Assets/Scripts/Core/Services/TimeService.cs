@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Core.GameSpeedStateMachines;
+using Core.Games.GameSpeedStateMachines;
 using Core.GameSpeedStateMachines.States;
 using Cysharp.Threading.Tasks;
 using Settings;
@@ -36,9 +36,13 @@ namespace Core.Services
             StartTicking().Forget();
         }
         
-        public void ChangeGameSpeedState<T>() where T : IGameSpeedState
+        public void SetGameSpeedState<T>() where T : IGameSpeedState
         {
             _gameSpeedStateMachine.SwitchState<T>();
+        }
+        public void SetLastGameSpeedState()
+        {
+            _gameSpeedStateMachine.SwitchLastState();
         }
 
         private async UniTaskVoid StartTicking()
