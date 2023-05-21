@@ -17,10 +17,10 @@ MonoBehaviour:
   - Name: AMD1
     Price: 120
     Power: 200
-    StartSellDay: 60
-    EndSellDay: 200
+    AppearDay: 150
+    Duration: 90
   - Name: AMD2
     Price: 145
     Power: 480
-    StartSellDay: 240
-    EndSellDay: 370
+    AppearDay: 250
+    Duration: 120

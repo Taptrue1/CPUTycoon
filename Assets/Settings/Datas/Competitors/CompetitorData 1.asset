@@ -17,10 +17,10 @@ MonoBehaviour:
   - Name: Intel1
     Price: 100
     Power: 200
-    StartSellDay: 30
-    EndSellDay: 180
+    AppearDay: 30
+    Duration: 180
   - Name: Intel2
     Price: 150
     Power: 500
-    StartSellDay: 250
-    EndSellDay: 360
+    AppearDay: 180
+    Duration: 180

@@ -61,7 +61,7 @@ namespace Core.UI.Windows
             money.Changed += OnMoneyChanged;
             
             OnMoneyChanged(money.Value);
-            OnDateChanged(_timeService.CurrentDateTime);
+            OnDateChanged(_timeService.CurrentDate);
         }
         public override void Show()
         {

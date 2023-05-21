@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using Settings;
 using Utils.CustomNumbers;
-using Zenject;
 
 namespace Core.Services
 {
     public class CurrencyService
     {
         private readonly Dictionary<string, CustomNumber<int>> _currencies;
-
-        [Inject]
+        
         public CurrencyService(CoreSettings coreSettings)
         {
             _currencies = new Dictionary<string, CustomNumber<int>>();

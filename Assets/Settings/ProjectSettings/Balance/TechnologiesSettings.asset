@@ -13,34 +13,61 @@ MonoBehaviour:
   m_Name: TechnologiesSettings
   m_EditorClassIdentifier: 
   <TechProcesses>k__BackingField:
-  - <TechProcess>k__BackingField: 10
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 30
+    <TechProcess>k__BackingField: 10
     <MesureUnit>k__BackingField: 0
-  - <TechProcess>k__BackingField: 1
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <TechProcess>k__BackingField: 1
     <MesureUnit>k__BackingField: 0
-  - <TechProcess>k__BackingField: 400
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <TechProcess>k__BackingField: 400
     <MesureUnit>k__BackingField: 1
   <Frequencies>k__BackingField:
-  - <Frequency>k__BackingField: 1
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 10
+    <Frequency>k__BackingField: 1
     <MesureUnit>k__BackingField: 1
-  - <Frequency>k__BackingField: 100
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <Frequency>k__BackingField: 100
     <MesureUnit>k__BackingField: 1
-  - <Frequency>k__BackingField: 1
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <Frequency>k__BackingField: 1
     <MesureUnit>k__BackingField: 2
   <FormFactors>k__BackingField:
-  - <FormFactorName>k__BackingField: DPI14
-    <DevelopmentPointsPrice>k__BackingField: 100
-    <ImplementPrice>k__BackingField: 1000
-  - <FormFactorName>k__BackingField: DPI32
-    <DevelopmentPointsPrice>k__BackingField: 100
-    <ImplementPrice>k__BackingField: 2000
-  - <FormFactorName>k__BackingField: DPI64
-    <DevelopmentPointsPrice>k__BackingField: 100
-    <ImplementPrice>k__BackingField: 3000
+  - <Power>k__BackingField: 1000
+    <DevelopmentPrice>k__BackingField: 30
+    <FormFactorName>k__BackingField: DPI14
+    <DevelopmentPointsPrice>k__BackingField: 10
+  - <Power>k__BackingField: 2000
+    <DevelopmentPrice>k__BackingField: 10
+    <FormFactorName>k__BackingField: DPI32
+    <DevelopmentPointsPrice>k__BackingField: 30
+  - <Power>k__BackingField: 3000
+    <DevelopmentPrice>k__BackingField: 10
+    <FormFactorName>k__BackingField: DPI64
+    <DevelopmentPointsPrice>k__BackingField: 50
   <Ram>k__BackingField:
-  - <Ram>k__BackingField: 32
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <Ram>k__BackingField: 32
     <MesureUnit>k__BackingField: 1
-  - <Ram>k__BackingField: 128
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <Ram>k__BackingField: 128
     <MesureUnit>k__BackingField: 1
-  - <Ram>k__BackingField: 256
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 100
+    <Ram>k__BackingField: 256
     <MesureUnit>k__BackingField: 1
-  <Bits>k__BackingField: 08000000100000002000000040000000
+  <Bits>k__BackingField:
+  - <Power>k__BackingField: 100
+    <DevelopmentPrice>k__BackingField: 10
+    <Bits>k__BackingField: 16
+  - <Power>k__BackingField: 200
+    <DevelopmentPrice>k__BackingField: 20
+    <Bits>k__BackingField: 8

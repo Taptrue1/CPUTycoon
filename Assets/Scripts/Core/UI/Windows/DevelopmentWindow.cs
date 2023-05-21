@@ -49,7 +49,7 @@ namespace Core.UI.Windows
         private List<FrequencyPair> _frequencyPairs;
         private List<FormFactorPair> _formFactorPairs;
         private List<RamPair> _ramPairs;
-        private List<int> _bits;
+        private List<BitsPair> _bits;
 
         private const string ResearchLockReason = "You need to research first {0} technologies";
         private const string DevelopmentLockReason = "Processor is in development";
@@ -106,12 +106,13 @@ namespace Core.UI.Windows
             var frequency = _frequencyPairs[_frequencyDropdown.value];
             var formFactor = _formFactorPairs[_formFactorDropdown.value];
             var ram = _ramPairs.Count == 0 ? null : _ramPairs[_ramDropdown.value];
-            var bits = _bits.Count == 0 ? 0 : _bits[_bitsDropdown.value];
+            var bits = _bits.Count == 0 ? null : _bits[_bitsDropdown.value];
             
             var name = _nameInputField.text;
-            var price = int.Parse(_priceInputField.text);
-            var processor = new Processor(name, price, techProcess, frequency,
-                formFactor, ram, bits);
+            var sellPrice = int.Parse(_priceInputField.text);
+            var techs = new List<BasePair> {techProcess, frequency, formFactor, ram, bits}.Where(pair => pair != null)
+                .ToList();
+            var processor = new Processor(name, sellPrice, techs);
             
             _game.SetProcessorToDevelop(processor);
         }

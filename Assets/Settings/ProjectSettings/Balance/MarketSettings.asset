@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0036ec8cfb2147c58886c3435be2e2b7, type: 3}
   m_Name: MarketSettings
   m_EditorClassIdentifier: 
-  <ClientsCount>k__BackingField: 100000
+  <ClientsCount>k__BackingField:
+    <DefaultValue>k__BackingField: 100000
+    <GrowthValue>k__BackingField: 500000
+    <ProgressionType>k__BackingField: 0
+  <ClientGroups>k__BackingField:
+  - <Priority>k__BackingField: 0
+    <ClientsPercentage>k__BackingField: 70
+  - <Priority>k__BackingField: 1
+    <ClientsPercentage>k__BackingField: 20
+  - <Priority>k__BackingField: 2
+    <ClientsPercentage>k__BackingField: 10
   <Competitors>k__BackingField:
   - {fileID: 11400000, guid: 07944e6d228bba74ea62981d2465b53a, type: 2}
   - {fileID: 11400000, guid: 64346a87fb8aa8b4fb63725173e91c29, type: 2}
   - {fileID: 11400000, guid: 88178cbf8e5ac03489ce4fcd555ade66, type: 2}
+  <Trends>k__BackingField:
+  - <StartDayOffset>k__BackingField: 100
+    <Duration>k__BackingField: 130
+    <SellPercentBonus>k__BackingField: 10
+    <TechnologyType>k__BackingField: 5
+    <TechnologyIndex>k__BackingField: 2

@@ -12,9 +12,9 @@ namespace Core.Services
     {
         public event Action Tick;
         public event Action<DateTime> DateTimeChanged;
-        public DateTime CurrentDateTime => _currentDateTime;
+        public DateTime CurrentDate => _currentDate;
         
-        private DateTime _currentDateTime;
+        private DateTime _currentDate;
         private readonly GameSpeedStateMachine _gameSpeedStateMachine;
         private const int TickInterval = 1;
 
@@ -30,7 +30,7 @@ namespace Core.Services
             };
             
             _gameSpeedStateMachine = new(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
-            _currentDateTime = DateTime.Now; //TODO add date save/load and default date constant
+            _currentDate = DateTime.Now; //TODO add date save/load and default date constant
             
             //TODO add cancellation token
             StartTicking().Forget();
@@ -50,8 +50,8 @@ namespace Core.Services
             while (true)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(TickInterval));
-                _currentDateTime = _currentDateTime.AddDays(TickInterval);
-                DateTimeChanged?.Invoke(_currentDateTime);
+                _currentDate = _currentDate.AddDays(TickInterval);
+                DateTimeChanged?.Invoke(_currentDate);
                 Tick?.Invoke();
             }
         }

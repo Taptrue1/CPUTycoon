@@ -7,16 +7,17 @@ namespace Core.Datas
     public class CompetitorData : ScriptableObject
     {
         [field: SerializeField] public string Name { get; private set; }
-        [field: SerializeField] public ProductReleaseData[] ProductReleases { get; private set; }
+        [field: SerializeField] public ProductData[] ProductReleases { get; private set; }
     }
     
     [Serializable]
-    public class ProductReleaseData
+    public class ProductData
     {
+        //TODO change power to Option like in ClientGroupData
         public string Name;
-        public int Price;
-        public int Power;
-        public int StartSellDay;
-        public int EndSellDay;
+        public double Price;
+        public double Power;
+        public int AppearDay;
+        public int Duration;
     }
 }

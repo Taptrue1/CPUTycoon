@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using Core.UI;
 using Core.UI.WindowsStateMachines;
-using Zenject;
 
 namespace Core.Services
 {
@@ -10,8 +8,7 @@ namespace Core.Services
     {
         private WindowsStateMachine _windowsStateMachine;
         private readonly UIFactory _uiFactory;
-
-        [Inject]
+        
         public UIService(UIFactory uiFactory)
         {
             _uiFactory = uiFactory;

@@ -17,10 +17,10 @@ MonoBehaviour:
   - Name: Q1
     Price: 200
     Power: 300
-    StartSellDay: 80
-    EndSellDay: 250
+    AppearDay: 200
+    Duration: 90
   - Name: Q2
     Price: 400
     Power: 1000
-    StartSellDay: 300
-    EndSellDay: 500
+    AppearDay: 360
+    Duration: 120
