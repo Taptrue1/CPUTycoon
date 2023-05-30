@@ -13,6 +13,7 @@ namespace Settings
         [field: SerializeField] public WindowPresenter CoreWindow { get; private set; }
         [field: SerializeField] public WindowPresenter ResearchWindow { get; private set; }
         [field: SerializeField] public WindowPresenter DevelopmentWindow { get; private set; }
+        [field: SerializeField] public WindowPresenter OfficeWindow { get; private set; }
         
         [field: Header("Views")]
         [field: SerializeField] public TechnologyView TechnologyView { get; private set; }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c6137b60bd47dfab1e9d4ba1d6d368, type: 3}
+  m_Name: TeamSettings
+  m_EditorClassIdentifier: 
+  <FreeWorkersCount>k__BackingField: 10
+  <FreeWorkersGenerateDelay>k__BackingField: 7
+  <Names>k__BackingField:
+  - 123
+  <Surnames>k__BackingField:
+  - 123
+  <Offices>k__BackingField:
+  - {fileID: 4784785503504802615, guid: 2b06016d7048a774db3bf325ca86cf1a, type: 3}
+  <WorkerViews>k__BackingField:
+  - {fileID: 1004666457163680935, guid: 2b06016d7048a774db3bf325ca86cf1a, type: 3}

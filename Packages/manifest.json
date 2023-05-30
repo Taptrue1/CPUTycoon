@@ -6,7 +6,7 @@
     "com.needle.selective-profiling": "1.0.1-pre.1",
     "com.rfadeev.pumpeditor": "https://github.com/rfadeev/pump-editor.git",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.ide.rider": "https://github.com/van800/com.unity.ide.rider.git?path=/Packages/com.unity.ide.rider#3.0.21",
+    "com.unity.ide.rider": "3.0.21",
     "com.unity.ide.visualstudio": "2.0.17",
     "com.unity.nuget.newtonsoft-json": "3.0.2",
     "com.unity.recorder": "3.0.3",

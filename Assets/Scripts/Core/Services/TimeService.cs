@@ -12,6 +12,7 @@ namespace Core.Services
     {
         public event Action Tick;
         public event Action<DateTime> DateTimeChanged;
+        public DateTime StartDate { get; private set; }
         public DateTime CurrentDate => _currentDate;
         
         private DateTime _currentDate;
@@ -31,7 +32,7 @@ namespace Core.Services
             
             _gameSpeedStateMachine = new(gameSpeedStates[typeof(PauseGameSpeedState)], gameSpeedStates);
             _currentDate = DateTime.Now; //TODO add date save/load and default date constant
-            
+            StartDate = _currentDate;
             //TODO add cancellation token
             StartTicking().Forget();
         }

@@ -10,6 +10,7 @@ namespace Settings
         [field: SerializeField] public MarketSettings MarketSettings { get; private set; }
         [field: SerializeField] public CurrencySettings CurrencySettings { get; private set; }
         [field: SerializeField] public TechnologiesSettings TechnologiesSettings { get; private set; }
+        [field: SerializeField] public TeamSettings TeamSettings { get; private set; }
         [field: SerializeField] public string TechTreePath { get; private set; }
     }
 }

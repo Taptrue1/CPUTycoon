@@ -17,13 +17,7 @@ namespace Core.Games
         private Processor _processorToDevelop;
         private Technology _technologyToResearch;
         private readonly CurrencyService _currencyService;
-        
-        //TODO delete const and set values by TeamService
-        private const int RPPerDay = 1;
-        private const int DPPerDay = 1;
-        private const int RPPrice = 100;
-        private const int DPPrice = 100;
-        
+
         [Inject]
         public Game(CurrencyService currencyService, TimeService timeService)
         {
@@ -40,21 +34,16 @@ namespace Core.Games
             _processorToDevelop = processor;
         }
 
-        #region TickMethods
+        #region Callbacks
         
         private void OnTick()
         {
-            //TODO change RP, DP and Money to CurrencyData
-            var money = _currencyService.GetCurrency("Money");
+            //TODO change RP and DP to CurrencyData
             var researchPoints = _currencyService.GetCurrency("RP");
             var developmentPoints = _currencyService.GetCurrency("DP");
-            var researchPointsPrice = RPPerDay * RPPrice;
-            var developmentPointsPrice = DPPerDay * DPPrice;
-            
-            if(_technologyToResearch != null && money.Value >= researchPointsPrice)
+
+            if(_technologyToResearch != null)
             {
-                researchPoints.Value += RPPerDay;
-                money.Value -= researchPointsPrice;
                 Debug.Log("Researching...");
                 if (_technologyToResearch.ResearchPrice > researchPoints.Value) return;
                 researchPoints.Value = 0;
@@ -62,10 +51,8 @@ namespace Core.Games
                 _technologyToResearch = null;
                 Debug.Log("Researched!");
             }
-            if(_processorToDevelop != null && money.Value >= developmentPointsPrice)
+            if(_processorToDevelop != null)
             {
-                developmentPoints.Value += DPPerDay;
-                money.Value -= developmentPointsPrice;
                 Debug.Log("Developing...");
                 if (_processorToDevelop.DevelopmentPointsPrice > developmentPoints.Value) return;
                 developmentPoints.Value = 0;

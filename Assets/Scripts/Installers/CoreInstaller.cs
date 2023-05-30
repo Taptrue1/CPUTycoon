@@ -20,6 +20,7 @@ namespace Installers
         {
             Container.Bind<CurrencyService>().AsSingle().NonLazy();
             Container.Bind<TimeService>().AsSingle().NonLazy();
+            Container.Bind<TeamService>().AsSingle().NonLazy();
             Container.Bind<MarketService>().AsSingle().NonLazy();
             Container.Bind<Game>().AsSingle().NonLazy();
 
@@ -34,7 +35,8 @@ namespace Installers
             {
                 _coreSettings.UISettings.CoreWindow,
                 _coreSettings.UISettings.ResearchWindow,
-                _coreSettings.UISettings.DevelopmentWindow
+                _coreSettings.UISettings.DevelopmentWindow,
+                _coreSettings.UISettings.OfficeWindow
             };
 
             Container.Bind<Canvas>().FromInstance(canvas).AsSingle();

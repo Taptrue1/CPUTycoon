@@ -20,6 +20,7 @@ namespace Core.UI.Windows
         [Header("Windows Open Buttons")]
         [SerializeField] private Button _openResearchWindowButton;
         [SerializeField] private Button _openDevelopmentWindowButton;
+        [SerializeField] private Button _openOfficeWindowButton;
 
         //TODO change text to custom number view or something like that
         [Header("Texts")]
@@ -46,6 +47,7 @@ namespace Core.UI.Windows
 
             _openResearchWindowButton.onClick.AddListener(OnOpenResearchWindowButtonClicked);
             _openDevelopmentWindowButton.onClick.AddListener(OnOpenDevelopmentWindowButtonClicked);
+            _openOfficeWindowButton.onClick.AddListener(OnOpenOfficeWindowButtonClicked);
         }
 
         [Inject]
@@ -104,6 +106,10 @@ namespace Core.UI.Windows
         private void OnOpenDevelopmentWindowButtonClicked()
         {
             _uiService.ShowWindow<DevelopmentWindow>();
+        }
+        private void OnOpenOfficeWindowButtonClicked()
+        {
+            _uiService.ShowWindow<OfficeWindow>();
         }
 
         #endregion

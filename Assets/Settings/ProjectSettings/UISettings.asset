@@ -20,5 +20,7 @@ MonoBehaviour:
     type: 3}
   <DevelopmentWindow>k__BackingField: {fileID: 4805397417522580072, guid: 7bddc1da3051a7e4e9a0fde0be4b63d5,
     type: 3}
+  <OfficeWindow>k__BackingField: {fileID: 607288682318018591, guid: a43bd6296e873894ab4eee26cadba1e0,
+    type: 3}
   <TechnologyView>k__BackingField: {fileID: -8092261342021120046, guid: 2f39596bb651b0a4dbc0d0f2b94e959a,
     type: 3}

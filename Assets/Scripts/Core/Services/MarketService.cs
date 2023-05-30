@@ -19,7 +19,6 @@ namespace Core.Services
         private int _daysPassed;
 
         private readonly Game _game;
-        private readonly DateTime _startDate;
         private readonly TimeService _timeService;
         private readonly MarketSettings _marketSettings;
         private readonly CurrencyService _currencyService;
@@ -27,7 +26,6 @@ namespace Core.Services
         public MarketService(Game game, TimeService timeService, CurrencyService currencyService, CoreSettings coreSettings)
         {
             _game = game;
-            _startDate = DateTime.Now; //TODO change it to start date
             _timeService = timeService;
             _currencyService = currencyService;
             _marketSettings = coreSettings.MarketSettings;
@@ -39,7 +37,7 @@ namespace Core.Services
 
         private void OnTick()
         {
-            _daysPassed = (_timeService.CurrentDate - _startDate).Days;
+            _daysPassed = (_timeService.CurrentDate - _timeService.StartDate).Days;
             _activeProducts = GetActiveProducts();
 
             ReportNewProductAppeared();

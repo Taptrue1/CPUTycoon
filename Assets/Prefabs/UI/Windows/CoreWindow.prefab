@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 426486048314537102}
   - component: {fileID: 426486048314537101}
   m_Layer: 5
-  m_Name: TestButton
+  m_Name: OpenOfficePanelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2824,6 +2824,7 @@ MonoBehaviour:
   _fastestSpeedButton: {fileID: 426486048141629983}
   _openResearchWindowButton: {fileID: 426486047803306126}
   _openDevelopmentWindowButton: {fileID: 426486048253489095}
+  _openOfficeWindowButton: {fileID: 426486048314537101}
   _dateTextFormat: dd.MM.yyyy
   _companyNameTextFormat: '{0}'
   _moneyTextFormat: '{0}$'
