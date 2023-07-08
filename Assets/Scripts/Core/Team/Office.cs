@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Core.Team
@@ -23,12 +24,14 @@ namespace Core.Team
 
         public void AddScientist(Worker worker)
         {
-            var workerView = Instantiate(worker.WorkerView);
+            var workerPlace = ScientistsPlaces.First(place => place.childCount == 0);
+            var workerView = Instantiate(worker.WorkerViewPrefab, workerPlace);
             _scientists.Add(worker, workerView);
         }
         public void AddProgrammer(Worker worker)
         {
-            var workerView = Instantiate(worker.WorkerView);
+            var workerPlace = ProgrammersPlaces.First(place => place.childCount == 0);
+            var workerView = Instantiate(worker.WorkerViewPrefab, workerPlace);
             _programmers.Add(worker, workerView);
         }
         public void RemoveScientist(Worker worker)

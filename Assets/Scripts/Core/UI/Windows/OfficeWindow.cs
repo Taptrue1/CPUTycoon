@@ -88,37 +88,13 @@ namespace Core.UI.Windows
             var canHireProgrammer = _hiredProgrammersViews.Count < _teamService.Office.ProgrammersPlaces.Length;
 
             if (isHiredScientist)
-            {
-                var view = _hiredScientistsViews.First(view => view.Worker == worker);
-                view.transform.parent = _freeScientistsContainer;
-                _hiredScientistsViews.Remove(view);
-                _freeScientistsViews.Add(view);
-                _teamService.FireScientist(worker);
-            }
+                FireScientist(worker);
             else if (isHiredProgrammer)
-            {
-                var view = _hiredProgrammersViews.First(view => view.Worker == worker);
-                view.transform.parent = _freeProgrammersContainer;
-                _hiredProgrammersViews.Remove(view);
-                _freeProgrammersViews.Add(view);
-                _teamService.FireProgrammer(worker);
-            }
+                FireProgrammer(worker);
             else if (isFreeScientist && canHireScientist)
-            {
-                var view = _freeScientistsViews.First(view => view.Worker == worker);
-                view.transform.parent = _scientistsContainer;
-                _freeScientistsViews.Remove(view);
-                _hiredScientistsViews.Add(view);
-                _teamService.HireScientist(worker);
-            }
+                HireScientist(worker);
             else if (isFreeProgrammer && canHireProgrammer)
-            {
-                var view = _freeProgrammersViews.First(view => view.Worker == worker);
-                view.transform.parent = _programmersContainer;
-                _freeProgrammersViews.Remove(view);
-                _hiredProgrammersViews.Add(view);
-                _teamService.HireProgrammer(worker);
-            }
+                HireProgrammer(worker);
             
             UpdateTeamInfomation();
         }
@@ -175,6 +151,38 @@ namespace Core.UI.Windows
             _rpProducingCountTextObject.text = string.Format(_rpProducingCountTextFormat, rpProducing);
             _dpProducingCountTextObject.text = string.Format(_dpProducingCountTextFormat, dpProducing);
             _totalSalaryTextObject.text = string.Format(_totalSalaryTextFormat, totalSalary);
+        }
+        private void FireScientist(Worker worker)
+        {
+            var view = _hiredScientistsViews.First(view => view.Worker == worker);
+            view.transform.parent = _freeScientistsContainer;
+            _hiredScientistsViews.Remove(view);
+            _freeScientistsViews.Add(view);
+            _teamService.FireScientist(worker);
+        }
+        private void FireProgrammer(Worker worker)
+        {
+            var view = _hiredProgrammersViews.First(view => view.Worker == worker);
+            view.transform.parent = _freeProgrammersContainer;
+            _hiredProgrammersViews.Remove(view);
+            _freeProgrammersViews.Add(view);
+            _teamService.FireProgrammer(worker);
+        }
+        private void HireScientist(Worker worker)
+        {
+            var view = _freeScientistsViews.First(view => view.Worker == worker);
+            view.transform.parent = _scientistsContainer;
+            _freeScientistsViews.Remove(view);
+            _hiredScientistsViews.Add(view);
+            _teamService.HireScientist(worker);
+        }
+        private void HireProgrammer(Worker worker)
+        {
+            var view = _freeProgrammersViews.First(view => view.Worker == worker);
+            view.transform.parent = _programmersContainer;
+            _freeProgrammersViews.Remove(view);
+            _hiredProgrammersViews.Add(view);
+            _teamService.HireProgrammer(worker);
         }
 
         #endregion
