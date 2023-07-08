@@ -7,8 +7,11 @@ namespace Core.Technologies
     public class Technology
     {
         public string Name;
-        public int ResearchPrice;
-        public int TypeValue;
+        public int Power;
+        public int ResearchPoints;
+        public int DevelopPoints;
+        public int DevelopPrice;
+        public int Index;
         public TechnologyType Type;
         public List<Technology> Children;
         

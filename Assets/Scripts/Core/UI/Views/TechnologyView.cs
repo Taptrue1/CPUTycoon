@@ -10,20 +10,27 @@ namespace Core.UI.Views
     public class TechnologyView : MonoBehaviour
     {
         public event Action<Technology> Selected;
+        public Technology Technology => _technology;
+        public Transform InputPoint => _viewInputPoint;
+        public Transform OutputPoint => _viewOutputPoint;
 
+        [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameTextObject;
         [SerializeField] private Color _selectedColor;
         [SerializeField] private Color _unselectedColor;
+        [SerializeField] private Transform _viewInputPoint;
+        [SerializeField] private Transform _viewOutputPoint;
 
         private bool _isInited;
         private Button _button;
         private Technology _technology;
         
-        public void Init(Technology technology)
+        public void Init(Technology technology, Sprite icon)
         {
             if(_isInited) throw new Exception("Try to init already inited TechnologyView");
-            
+
             _isInited = true;
+            _icon.sprite = icon;
             _technology = technology;
             _nameTextObject.text = technology.Name;
             _button = GetComponent<Button>();

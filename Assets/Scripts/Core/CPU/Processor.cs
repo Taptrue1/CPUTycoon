@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Settings;
+using Core.Technologies;
 
 namespace Core.CPU
 {
@@ -9,48 +9,24 @@ namespace Core.CPU
         public double SellPrice { get; }
         public double Power { get; private set; }
         public double DevelopmentPrice { get; private set;  }
-        public double DevelopmentPointsPrice { get; private set;  }
-        public List<BasePair> TechnologyPairs { get; }
+        public double DevelopmentPoints { get; private set;  }
+        public List<Technology> Technologies { get; }
 
-        public Processor(string name, int sellPrice, List<BasePair> pairs)
+        public Processor(string name, int sellPrice, List<Technology> technologies)
         {
             Name = name;
             SellPrice = sellPrice;
-            TechnologyPairs = pairs;
-
-            SetupPairs(pairs);
+            Technologies = technologies;
+            ApplyTechnologiesBonus();
         }
 
-        private void SetupPairs(List<BasePair> pairs)
+        private void ApplyTechnologiesBonus()
         {
-            foreach (var pair in pairs)
-                SetupPair(pair);
-        }
-        private void SetupPair(BasePair pair)
-        {
-            switch (pair)
+            foreach (var technology in Technologies)
             {
-                case TechProcessPair techProcess:
-                    Power += techProcess.Power;
-                    DevelopmentPrice += techProcess.DevelopmentPrice;
-                    break;
-                case FrequencyPair frequency:
-                    Power += frequency.Power;
-                    DevelopmentPrice += frequency.DevelopmentPrice;
-                    break;
-                case FormFactorPair formFactor:
-                    Power += formFactor.Power;
-                    DevelopmentPrice += formFactor.DevelopmentPrice;
-                    DevelopmentPointsPrice += formFactor.DevelopmentPointsPrice;
-                    break;
-                case RamPair ram:
-                    Power += ram.Power;
-                    DevelopmentPrice += ram.DevelopmentPrice;
-                    break;
-                case BitsPair bits:
-                    Power += bits.Power;
-                    DevelopmentPrice += bits.DevelopmentPrice;
-                    break;
+                Power += technology.Power;
+                DevelopmentPrice += technology.DevelopPrice;
+                DevelopmentPoints += technology.DevelopPoints;
             }
         }
     }

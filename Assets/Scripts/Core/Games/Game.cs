@@ -45,7 +45,7 @@ namespace Core.Games
             if(_technologyToResearch != null)
             {
                 Debug.Log("Researching...");
-                if (_technologyToResearch.ResearchPrice > researchPoints.Value) return;
+                if (_technologyToResearch.ResearchPoints > researchPoints.Value) return;
                 researchPoints.Value = 0;
                 _technologyToResearch.Research();
                 _technologyToResearch = null;
@@ -54,7 +54,7 @@ namespace Core.Games
             if(_processorToDevelop != null)
             {
                 Debug.Log("Developing...");
-                if (_processorToDevelop.DevelopmentPointsPrice > developmentPoints.Value) return;
+                if (_processorToDevelop.DevelopmentPoints > developmentPoints.Value) return;
                 developmentPoints.Value = 0;
                 ProcessorDeveloped?.Invoke(_processorToDevelop);
                 _processorToDevelop = null;

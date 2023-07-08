@@ -5,7 +5,6 @@ using Core.CPU;
 using Core.Games;
 using Core.Services;
 using Core.Technologies;
-using Core.UI.Views;
 using Settings;
 using TMPro;
 using UnityEngine;
@@ -41,15 +40,8 @@ namespace Core.UI.Windows
         
         private Game _game;
         private UIService _uiService;
-        private UIFactory _uiFactory;
         private Technology _techTreeRootNode;
         private TechnologiesSettings _technologiesSettings;
-        private List<TechnologyView> _technologyViews;
-        private List<TechProcessPair> _techProcessPairs;
-        private List<FrequencyPair> _frequencyPairs;
-        private List<FormFactorPair> _formFactorPairs;
-        private List<RamPair> _ramPairs;
-        private List<BitsPair> _bits;
 
         private const string ResearchLockReason = "You need to research first {0} technologies";
         private const string DevelopmentLockReason = "Processor is in development";
@@ -63,21 +55,12 @@ namespace Core.UI.Windows
         }
 
         [Inject]
-        public void InjectDependencies(Game game, UIService uiService, UIFactory uiFactory, CoreSettings coreSettings,
-            Technology techTreeRootNode)
+        public void InjectDependencies(Game game, UIService uiService, CoreSettings coreSettings, Technology techTreeRootNode)
         {
             _game = game;
             _uiService = uiService;
-            _uiFactory = uiFactory;
             _technologiesSettings = coreSettings.TechnologiesSettings;
             _techTreeRootNode = techTreeRootNode;
-            
-            _technologyViews = new();
-            _techProcessPairs = new();
-            _frequencyPairs = new();
-            _formFactorPairs = new();
-            _ramPairs = new();
-            _bits = new();
         }
         public override void Show()
         {
@@ -94,7 +77,6 @@ namespace Core.UI.Windows
             _nameInputField.text = string.Empty;
             _priceInputField.text = string.Empty;
             
-            UpdateAvailableSettings();
             SetupDropdowns();
         }
         
@@ -102,19 +84,20 @@ namespace Core.UI.Windows
         
         private void OnDevelopButtonClicked()
         {
-            var techProcess = _techProcessPairs[_techProcessDropdown.value];
-            var frequency = _frequencyPairs[_frequencyDropdown.value];
-            var formFactor = _formFactorPairs[_formFactorDropdown.value];
-            var ram = _ramPairs.Count == 0 ? null : _ramPairs[_ramDropdown.value];
-            var bits = _bits.Count == 0 ? null : _bits[_bitsDropdown.value];
-            
             var name = _nameInputField.text;
             var sellPrice = int.Parse(_priceInputField.text);
-            var techs = new List<BasePair> {techProcess, frequency, formFactor, ram, bits}.Where(pair => pair != null)
-                .ToList();
-            var processor = new Processor(name, sellPrice, techs);
+            var techs = new List<Technology>()
+            {
+                GetTechnology(TechnologyType.TechProcess, _techProcessDropdown.value),
+                GetTechnology(TechnologyType.Frequency, _frequencyDropdown.value),
+                GetTechnology(TechnologyType.FormFactor, _formFactorDropdown.value),
+                GetTechnology(TechnologyType.Ram, _ramDropdown.value),
+                GetTechnology(TechnologyType.Bitness, _bitsDropdown.value)
+                //TODO add other tech types
+            };
+            techs.RemoveAll(tech => tech == null);
             
-            _game.SetProcessorToDevelop(processor);
+            _game.SetProcessorToDevelop(new Processor(name, sellPrice, techs));
         }
         private void OnExitButtonClicked()
         {
@@ -133,69 +116,54 @@ namespace Core.UI.Windows
             _ramDropdown.ClearOptions();
             _bitsDropdown.ClearOptions();
             
-            _techProcessDropdown.AddOptions(_techProcessPairs.ConvertAll(pair => pair.TechProcess + " " + pair.MesureUnit));
-            _frequencyDropdown.AddOptions(_frequencyPairs.ConvertAll(pair => pair.Frequency + " " + pair.MesureUnit));
-            _formFactorDropdown.AddOptions(_formFactorPairs.ConvertAll(pair => pair.FormFactorName));
-            _ramDropdown.AddOptions(_ramPairs.ConvertAll(pair => pair.Ram + " " + pair.MesureUnit));
-            _bitsDropdown.AddOptions(_bits.ConvertAll(bit => bit.ToString()));
+            foreach (var technology in GetResearchedTechnologies())
+                AddSetting(technology);
 
-            _techProcessDropdown.gameObject.SetActive(_techProcessPairs.Count != 0);
-            _frequencyDropdown.gameObject.SetActive(_frequencyPairs.Count != 0);
-            _formFactorDropdown.gameObject.SetActive(_formFactorPairs.Count != 0);
-            _ramDropdown.gameObject.SetActive(_ramPairs.Count != 0);
-            _bitsDropdown.gameObject.SetActive(_bits.Count != 0);
+            _techProcessDropdown.gameObject.SetActive(_techProcessDropdown.options.Count != 0);
+            _frequencyDropdown.gameObject.SetActive(_frequencyDropdown.options.Count != 0);
+            _formFactorDropdown.gameObject.SetActive(_formFactorDropdown.options.Count != 0);
+            _ramDropdown.gameObject.SetActive(_ramDropdown.options.Count != 0);
+            _bitsDropdown.gameObject.SetActive(_bitsDropdown.options.Count != 0);
         }
-        private void UpdateAvailableSettings()
-        {
-            _techProcessPairs.Clear();
-            _frequencyPairs.Clear();
-            _formFactorPairs.Clear();
-            _ramPairs.Clear();
-            _bits.Clear();
-            
-            var researchedTechnologies = GetResearchedTechnologies();
-            foreach (var technology in researchedTechnologies)
-                AddTechnologySetting(technology);
-        }
-        private void AddTechnologySetting(Technology technology)
+        private void AddSetting(Technology technology)
         {
             switch (technology.Type)
             {
                 case TechnologyType.TechProcess:
-                    var techProcess = _technologiesSettings.TechProcesses[technology.TypeValue];
-                    _techProcessPairs.Add(techProcess);
+                    _techProcessDropdown.AddOptions(new List<string> {technology.Name});
                     break;
                 case TechnologyType.Frequency:
-                    var frequency = _technologiesSettings.Frequencies[technology.TypeValue];
-                    _frequencyPairs.Add(frequency);
+                    _frequencyDropdown.AddOptions(new List<string> {technology.Name});
                     break;
                 case TechnologyType.FormFactor:
-                    var formFactor = _technologiesSettings.FormFactors[technology.TypeValue];
-                    _formFactorPairs.Add(formFactor);
+                    _formFactorDropdown.AddOptions(new List<string> {technology.Name});
                     break;
                 case TechnologyType.Cache:
-                    //TODO: Add cache
+                    //TODO add cache
                     break;
                 case TechnologyType.Ram:
-                    var ram = _technologiesSettings.Ram[technology.TypeValue];
-                    _ramPairs.Add(ram);
+                    _ramDropdown.AddOptions(new List<string> {technology.Name});
                     break;
                 case TechnologyType.Bitness:
-                    var bitness = _technologiesSettings.Bits[technology.TypeValue];
-                    _bits.Add(bitness);
+                    _bitsDropdown.AddOptions(new List<string> {technology.Name});
                     break;
                 case TechnologyType.Architecture:
-                    //TODO: Add architecture
+                    //TODO add architecture
                     break;
                 case TechnologyType.InstructionSet:
-                    //TODO: Add instruction set
+                    //TODO add instruction set
                     break;
                 case TechnologyType.Separate:
-                    //TODO: Add separate
+                    //TODO add separate
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+        private void SetLockView(bool active, string reason)
+        {
+            _lockedPanel.SetActive(active);
+            _lockReasonTextObject.text = reason;
         }
         private List<Technology> GetResearchedTechnologies()
         {
@@ -215,13 +183,22 @@ namespace Core.UI.Windows
             }
             return researchedTechnologies;
         }
-        
-        private void SetLockView(bool active, string reason)
+        private Technology GetTechnology(TechnologyType type, int index)
         {
-            _lockedPanel.SetActive(active);
-            _lockReasonTextObject.text = reason;
+            var currentTechnologies = new List<Technology> {_techTreeRootNode};
+            while(currentTechnologies.Count > 0)
+            {
+                var newTechnologies = new List<Technology>();
+                foreach (var technology in currentTechnologies)
+                {
+                    if(technology.Type == type && technology.Index == index) return technology;
+                    newTechnologies.AddRange(technology.Children);
+                }
+                currentTechnologies = newTechnologies;
+            }
+            return null;
         }
-
+        
         #endregion
     }
 }

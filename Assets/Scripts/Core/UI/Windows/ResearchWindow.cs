@@ -5,8 +5,10 @@ using Core.Games;
 using Core.Services;
 using Core.Technologies;
 using Core.UI.Views;
+using Settings;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 using Zenject;
 
 namespace Core.UI.Windows
@@ -19,12 +21,14 @@ namespace Core.UI.Windows
         [SerializeField] private RectTransform _technologiesContainer;
 
         [Header("Other")]
+        [SerializeField] private UiLineRenderer _lineRenderer;
         [SerializeField] private Button _exitButton;
 
         private Game _game;
         private UIService _uiService;
         private UIFactory _uiFactory;
         private Technology _techTreeRootNode;
+        private TechnologiesSettings _technologiesSettings;
         
         private Technology _selectedTechnology;
         private List<TechnologyView> _technologyViews;
@@ -35,7 +39,7 @@ namespace Core.UI.Windows
         }
 
         [Inject]
-        public void InjectDependencies(Game game, UIService uiService, UIFactory uiFactory,
+        public void InjectDependencies(Game game, UIService uiService, UIFactory uiFactory, CoreSettings coreSettings,
             Technology techTreeRootNode)
         {
             _game = game;
@@ -43,8 +47,11 @@ namespace Core.UI.Windows
             _uiFactory = uiFactory;
             _techTreeRootNode = techTreeRootNode;
             _technologyViews = new List<TechnologyView>();
+            _technologiesSettings = coreSettings.TechnologiesSettings;
             
             SetupTechTreeView();
+            
+            _lineRenderer.gameObject.transform.localPosition -= new Vector3(_technologiesContainer.sizeDelta.x, 0, 0);
         }
         public override void Show()
         {
@@ -59,12 +66,12 @@ namespace Core.UI.Windows
             var views = CreateViews();
             SetupTechnologiesContainer(views);
             SetupViews(views);
+            SetupLines();
         }
         private void SetupTechnologiesContainer(List<List<TechnologyView>> views)
         {
             var containerWidth = views.Count * _xOffset;
             var containerHeight = views.OrderByDescending(list => list.Count).First().Count * _yOffset;
-
             _technologiesContainer.sizeDelta = new Vector2(containerWidth, containerHeight);
             _technologiesContainer.anchoredPosition = new Vector2(containerWidth / 2, containerHeight / 2);
         }
@@ -84,6 +91,15 @@ namespace Core.UI.Windows
                 nodeX++;
             }
         }
+        private void SetupLines()
+        {
+            var lines = (from view in _technologyViews
+                let viewTechnology = view.Technology
+                from tech in viewTechnology.Children
+                let techView = _technologyViews.First(v => v.Technology.Name == tech.Name)
+                select new Line(view.OutputPoint.position, techView.InputPoint.position)).ToList();
+            _lineRenderer.SetLines(lines);
+        }
         private List<List<TechnologyView>> CreateViews()
         {
             var currentNodes = _techTreeRootNode.Children.ToList();
@@ -95,8 +111,7 @@ namespace Core.UI.Windows
                 foreach (var node in currentNodes)
                 {
                     var view = _uiFactory.CreateTechnologyView(_technologiesContainer);
-
-                    view.Init(node);
+                    view.Init(node, GetTechnologyIcon(node));
                     view.Selected += OnTechnologySelected;
                     newViews.Add(view);
                     newNodes.AddRange(node.Children.Where(child =>
@@ -109,7 +124,24 @@ namespace Core.UI.Windows
 
             return views;
         }
-        
+        private Sprite GetTechnologyIcon(Technology technology)
+        {
+            //change enum to type
+            return technology.Type switch
+            {
+                TechnologyType.TechProcess => _technologiesSettings.TechProcessIcon,
+                TechnologyType.Frequency => _technologiesSettings.FrequencyIcon,
+                TechnologyType.FormFactor => _technologiesSettings.FormFactorIcon,
+                TechnologyType.Cache => null,
+                TechnologyType.Ram => _technologiesSettings.RamIcon,
+                TechnologyType.Bitness => _technologiesSettings.BitsIcon,
+                TechnologyType.Architecture => null,
+                TechnologyType.InstructionSet => null,
+                TechnologyType.Separate => null,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
         #endregion
         
         #region Callbacks

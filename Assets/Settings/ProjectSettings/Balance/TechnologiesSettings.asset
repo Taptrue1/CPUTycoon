@@ -71,3 +71,13 @@ MonoBehaviour:
   - <Power>k__BackingField: 200
     <DevelopmentPrice>k__BackingField: 20
     <Bits>k__BackingField: 8
+  <TechProcessIcon>k__BackingField: {fileID: 10907, guid: 0000000000000000f000000000000000,
+    type: 0}
+  <FrequencyIcon>k__BackingField: {fileID: 10901, guid: 0000000000000000f000000000000000,
+    type: 0}
+  <FormFactorIcon>k__BackingField: {fileID: 10915, guid: 0000000000000000f000000000000000,
+    type: 0}
+  <RamIcon>k__BackingField: {fileID: 10911, guid: 0000000000000000f000000000000000,
+    type: 0}
+  <BitsIcon>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000,
+    type: 0}
