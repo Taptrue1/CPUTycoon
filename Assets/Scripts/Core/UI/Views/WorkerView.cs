@@ -1,5 +1,6 @@
 using System;
 using Core.Team;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,11 @@ namespace Core.UI.Views
     {
         public event Action<Worker> Clicked;
         public Worker Worker => _worker;
-        //TODO add worker info display
+        
+        [SerializeField] private Image _icon;
+        [SerializeField] private TextMeshProUGUI _nameTextObject;
+        [SerializeField] private TextMeshProUGUI _descriptionTextObject;
+        
         private Worker _worker;
         private Button _button;
         
@@ -22,7 +27,11 @@ namespace Core.UI.Views
 
         public void Init(Worker worker)
         {
-            _worker = worker;   
+            _worker = worker;
+            _icon.sprite = worker.Icon;
+            _nameTextObject.text = $"{worker.Name} {worker.Surname}";
+            _descriptionTextObject.text =
+                $"Age: {worker.Age} years\nSalary: ${worker.Salary} / month\nPoints generation: {worker.PointsGeneration} / day";
         }
         
         private void OnButtonClick()

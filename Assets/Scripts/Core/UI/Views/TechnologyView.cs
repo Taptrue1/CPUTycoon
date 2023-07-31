@@ -16,10 +16,12 @@ namespace Core.UI.Views
 
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameTextObject;
-        [SerializeField] private Color _selectedColor;
-        [SerializeField] private Color _unselectedColor;
+        [SerializeField] private TextMeshProUGUI _priceTextObject;
         [SerializeField] private Transform _viewInputPoint;
         [SerializeField] private Transform _viewOutputPoint;
+        [Header("Test")]
+        [SerializeField] private Color _selectedColor;
+        [SerializeField] private Color _unselectedColor;
 
         private bool _isInited;
         private Button _button;
@@ -33,6 +35,7 @@ namespace Core.UI.Views
             _icon.sprite = icon;
             _technology = technology;
             _nameTextObject.text = technology.Name;
+            _priceTextObject.text = technology.ResearchPoints.ToString();
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnButtonClicked);
             

@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: TeamSettings
   m_EditorClassIdentifier: 
   <FreeWorkersCount>k__BackingField: 10
-  <FreeWorkersGenerateDelay>k__BackingField: 7
+  <FreeWorkersGenerateDelay>k__BackingField: 30
+  <WorkersMinAge>k__BackingField: 18
+  <WorkersMaxAge>k__BackingField: 60
+  <WorkersMinSalary>k__BackingField: 500
+  <WorkersMaxSalary>k__BackingField: 3000
+  <WorkersMinPointsGeneration>k__BackingField: 1
+  <WorkersMaxPointsGeneration>k__BackingField: 10
   <Names>k__BackingField:
   - Ethan
   - Sophia
@@ -38,18 +44,46 @@ MonoBehaviour:
   - Evans
   <Offices>k__BackingField:
   - {fileID: 7645678702328468336, guid: 6ec4daee9683ea84b8fa79d819920076, type: 3}
-  <WorkerViews>k__BackingField:
-  - {fileID: 8871263719053163447, guid: f5db06ddf881db04bb4431a056c5faf3, type: 3}
-  - {fileID: 1783899306417280601, guid: a95bd11dfa49b8e4dae93ff18dee865f, type: 3}
-  - {fileID: 8024544374271798123, guid: f97abe2998c3e0b46a83efecb283f0e5, type: 3}
-  - {fileID: 1912307254911332860, guid: 64e96832cafc78c4cb7e18850da05c30, type: 3}
-  - {fileID: 7322454931228884228, guid: 1911008d811b0de4e937ca61f94039ef, type: 3}
-  - {fileID: 8353025590031775502, guid: e9726102091bfdc439ca2a5d361a95f2, type: 3}
-  - {fileID: 7682013236775800000, guid: 0f4735ed483b2094aaff30d6a017b594, type: 3}
-  - {fileID: 2416778305859918588, guid: 05820894033035e4f8f37f18174200e2, type: 3}
-  - {fileID: 4818626608898662902, guid: 6dd5ed474cfec97429e122a3920124fa, type: 3}
-  - {fileID: 6454159331928887246, guid: 7ed33e85d6f504d41903870f23735db1, type: 3}
-  - {fileID: 5044324085665679140, guid: 33a0416b84463e343b718792aadb76c1, type: 3}
-  - {fileID: 3713741710487899884, guid: 6df1cf475a7d6084ba31c7c887d9584c, type: 3}
-  - {fileID: 6908123779786152402, guid: 56a5b32bf36e34d458bd315c7153ac7f, type: 3}
-  - {fileID: 1509685405555760509, guid: f0c1980911823624fb76351725ae1ad6, type: 3}
+  <WorkerPairs>k__BackingField:
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 8871263719053163447, guid: f5db06ddf881db04bb4431a056c5faf3,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 1783899306417280601, guid: a95bd11dfa49b8e4dae93ff18dee865f,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 8024544374271798123, guid: f97abe2998c3e0b46a83efecb283f0e5,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 1912307254911332860, guid: 64e96832cafc78c4cb7e18850da05c30,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 7322454931228884228, guid: 1911008d811b0de4e937ca61f94039ef,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 8353025590031775502, guid: e9726102091bfdc439ca2a5d361a95f2,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 7682013236775800000, guid: 0f4735ed483b2094aaff30d6a017b594,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 2416778305859918588, guid: 05820894033035e4f8f37f18174200e2,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 4818626608898662902, guid: 6dd5ed474cfec97429e122a3920124fa,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 6454159331928887246, guid: 7ed33e85d6f504d41903870f23735db1,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 5044324085665679140, guid: 33a0416b84463e343b718792aadb76c1,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 3713741710487899884, guid: 6df1cf475a7d6084ba31c7c887d9584c,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 6908123779786152402, guid: 56a5b32bf36e34d458bd315c7153ac7f,
+      type: 3}
+  - <Icon>k__BackingField: {fileID: 0}
+    <WorkerView>k__BackingField: {fileID: 1509685405555760509, guid: f0c1980911823624fb76351725ae1ad6,
+      type: 3}

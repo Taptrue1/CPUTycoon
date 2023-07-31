@@ -27,9 +27,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 07944e6d228bba74ea62981d2465b53a, type: 2}
   - {fileID: 11400000, guid: 64346a87fb8aa8b4fb63725173e91c29, type: 2}
   - {fileID: 11400000, guid: 88178cbf8e5ac03489ce4fcd555ade66, type: 2}
-  <Trends>k__BackingField:
-  - <StartDayOffset>k__BackingField: 100
-    <Duration>k__BackingField: 130
-    <SellPercentBonus>k__BackingField: 10
-    <TechnologyType>k__BackingField: 5
-    <TechnologyIndex>k__BackingField: 2

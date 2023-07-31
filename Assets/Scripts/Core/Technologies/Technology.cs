@@ -11,6 +11,7 @@ namespace Core.Technologies
         public int ResearchPoints;
         public int DevelopPoints;
         public int DevelopPrice;
+        public int ProducePrice;
         public int Index;
         public TechnologyType Type;
         public List<Technology> Children;

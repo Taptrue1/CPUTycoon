@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MoneyCurrencyData
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Money
-  <StartValue>k__BackingField: 10000
+  <StartValue>k__BackingField: 100000

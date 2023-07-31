@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Core.Services;
 using Core.Team;
 using Core.UI.Views;
@@ -12,28 +13,34 @@ namespace Core.UI.Windows
 {
     public class OfficeWindow : WindowPresenter
     {
+        [Header("Panels")]
+        [SerializeField] private GameObject _scientistsTeamPanel;
+        [SerializeField] private GameObject _programmersTeamPanel;
         [Header("Containers")]
         [SerializeField] private Transform _scientistsContainer;
         [SerializeField] private Transform _programmersContainer;
         [SerializeField] private Transform _freeScientistsContainer;
         [SerializeField] private Transform _freeProgrammersContainer;
         [Header("Texts")]
-        [SerializeField] private TextMeshProUGUI _scientistsCountTextObject;
-        [SerializeField] private TextMeshProUGUI _programmersCountTextObject;
-        [SerializeField] private TextMeshProUGUI _rpProducingCountTextObject;
-        [SerializeField] private TextMeshProUGUI _dpProducingCountTextObject;
-        [SerializeField] private TextMeshProUGUI _totalSalaryTextObject;
-        [Header("TextsFormats")]
-        [SerializeField] private string _scientistsCountTextFormat = "Scientists: {0}/{1}";
-        [SerializeField] private string _programmersCountTextFormat = "Programmers: {0}/{1}";
-        [SerializeField] private string _rpProducingCountTextFormat = "RP: {0}";
-        [SerializeField] private string _dpProducingCountTextFormat = "DP: {0}";
-        [SerializeField] private string _totalSalaryTextFormat = "Salary: {0}$";
+        [SerializeField] private TextMeshProUGUI _officeInfoTextObject;
+        [SerializeField] private TextMeshProUGUI _hiredScientistsCountTextObject;
+        [SerializeField] private TextMeshProUGUI _hiredProgrammersCountTextObject;
+        [Header("TextFormats")]
+        [SerializeField] private string _hiredScientistsTitleTextFormat = "Hired Scientists: {0}/{1}";
+        [SerializeField] private string _hiredProgrammersTitleTextFormat = "Hired Programmers: {0}/{1}";
+        [SerializeField] private string _scientistsPlacesTextFormat = "Scientists places: {0}";
+        [SerializeField] private string _programmersPlacesTextFormat = "Programmers places: {0}";
+        [SerializeField] private string _rpProducingCountTextFormat = "RP / Day: {0}";
+        [SerializeField] private string _dpProducingCountTextFormat = "DP / Day: {0}";
+        [SerializeField] private string _totalSalaryTextFormat = "Total Salary: ${0}";
+        [SerializeField] private string _officeLevelTextFormat = "Office Level {0}";
         [Header("Prefabs")]
         [SerializeField] private WorkerView _workerViewPrefab;
         [Header("Other")]
+        [SerializeField] private Button _openScientistsTeamButton;
+        [SerializeField] private Button _openProgrammersTeamButton;
         [SerializeField] private Button _upgradeOfficeButton;
-        [SerializeField] private Button _closeButton;
+        [SerializeField] private Button _exitButton;
         
         private UIService _uiService;
         private TeamService _teamService;
@@ -44,8 +51,10 @@ namespace Core.UI.Windows
         private List<WorkerView> _hiredProgrammersViews;
         private void Awake()
         {
+            _openScientistsTeamButton.onClick.AddListener(OnOpenScientistsTeamButtonClick);
+            _openProgrammersTeamButton.onClick.AddListener(OnOpenProgrammersTeamButtonClick);
             _upgradeOfficeButton.onClick.AddListener(OnUpgradeOfficeButtonClick);
-            _closeButton.onClick.AddListener(OnCloseButtonClick);
+            _exitButton.onClick.AddListener(OnExitButtonClick);
         }
 
         [Inject]
@@ -64,17 +73,27 @@ namespace Core.UI.Windows
             //TODO if free workers count changed
             ClearFreeWorkersViews();
             SpawnFreeWorkerViews();
+            UpdateTeamInformation();
+            UpdateOfficeInformation();
         }
         
         #region Callbacks
         
+        private void OnOpenScientistsTeamButtonClick()
+        {
+            _scientistsTeamPanel.SetActive(true);
+        }
+        private void OnOpenProgrammersTeamButtonClick()
+        {
+            _programmersTeamPanel.SetActive(true);
+        }
         private void OnUpgradeOfficeButtonClick()
         {
             if(!_teamService.CanUpgradeOffice()) return;
             _teamService.UpgradeOffice();
             //TODO update scientists and programmers count text objects
         }
-        private void OnCloseButtonClick()
+        private void OnExitButtonClick()
         {
             _uiService.ShowWindow<CoreWindow>();
         }
@@ -96,7 +115,8 @@ namespace Core.UI.Windows
             else if (isFreeProgrammer && canHireProgrammer)
                 HireProgrammer(worker);
             
-            UpdateTeamInfomation();
+            UpdateOfficeInformation();
+            UpdateTeamInformation();
         }
 
         #endregion
@@ -137,20 +157,29 @@ namespace Core.UI.Windows
             _freeProgrammersViews.Clear();
             _freeScientistsViews.Clear();
         }
-        private void UpdateTeamInfomation()
+        private void UpdateOfficeInformation()
         {
             var rpProducing = _teamService.HiredScientists.Sum(worker => worker.PointsGeneration);
             var dpProducing = _teamService.HiredProgrammers.Sum(worker => worker.PointsGeneration);
             var totalSalary = _teamService.HiredScientists.Sum(worker => worker.Salary) +
                               _teamService.HiredProgrammers.Sum(worker => worker.Salary);
-            
-            _scientistsCountTextObject.text = string.Format(_scientistsCountTextFormat, _hiredScientistsViews.Count,
-                _teamService.Office.ScientistsPlaces.Length);
-            _programmersCountTextObject.text = string.Format(_programmersCountTextFormat, _hiredProgrammersViews.Count,
-                _teamService.Office.ProgrammersPlaces.Length);
-            _rpProducingCountTextObject.text = string.Format(_rpProducingCountTextFormat, rpProducing);
-            _dpProducingCountTextObject.text = string.Format(_dpProducingCountTextFormat, dpProducing);
-            _totalSalaryTextObject.text = string.Format(_totalSalaryTextFormat, totalSalary);
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine(string.Format(_officeLevelTextFormat, _teamService.OfficeLevel));
+            stringBuilder.AppendLine(string.Format(_scientistsPlacesTextFormat,
+                _teamService.Office.ScientistsPlaces.Length));
+            stringBuilder.AppendLine(string.Format(_programmersPlacesTextFormat,
+                _teamService.Office.ProgrammersPlaces.Length));
+            stringBuilder.AppendLine(string.Format(_rpProducingCountTextFormat, rpProducing));
+            stringBuilder.AppendLine(string.Format(_dpProducingCountTextFormat, dpProducing));
+            stringBuilder.AppendLine(string.Format(_totalSalaryTextFormat, totalSalary));
+            _officeInfoTextObject.text = stringBuilder.ToString();
+        }
+        private void UpdateTeamInformation()
+        {
+            _hiredScientistsCountTextObject.text = string.Format(_hiredScientistsTitleTextFormat,
+                _hiredScientistsViews.Count, _teamService.Office.ScientistsPlaces.Length);
+            _hiredProgrammersCountTextObject.text = string.Format(_hiredProgrammersTitleTextFormat,
+                _hiredProgrammersViews.Count, _teamService.Office.ProgrammersPlaces.Length);
         }
         private void FireScientist(Worker worker)
         {

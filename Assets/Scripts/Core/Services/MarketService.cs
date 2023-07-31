@@ -72,10 +72,10 @@ namespace Core.Services
             var playerProductCoeffs = _currentPlayerProcessor.Power / _currentPlayerProcessor.SellPrice;
             var activeProfuctsCoeffs = _activeProducts.Select(product => product.Power / product.Price).ToList();
             var totalProductsCoeffs = activeProfuctsCoeffs.Sum() + playerProductCoeffs;
-            var playerWaste = _currentPlayerProcessor.DevelopmentPrice * clientsPerDay;
+            var playerWaste = _currentPlayerProcessor.ProducePrice * clientsPerDay;
             var playerIncome = _currentPlayerProcessor.SellPrice *
                                (playerProductCoeffs / totalProductsCoeffs * clientsPerDay);
-            Debug.Log($"Player waste {_currentPlayerProcessor.DevelopmentPrice} * {clientsPerDay} = {playerWaste}\n" +
+            Debug.Log($"Player waste {_currentPlayerProcessor.ProducePrice} * {clientsPerDay} = {playerWaste}\n" +
                       $"Player income {_currentPlayerProcessor.SellPrice} * {playerProductCoeffs} / {totalProductsCoeffs} * {clientsPerDay} = {playerIncome}");
             return (int)(playerIncome - playerWaste);
         }

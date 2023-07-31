@@ -8,6 +8,7 @@ namespace Core.CPU
         public string Name { get; }
         public double SellPrice { get; }
         public double Power { get; private set; }
+        public double ProducePrice { get; private set;  }
         public double DevelopmentPrice { get; private set;  }
         public double DevelopmentPoints { get; private set;  }
         public List<Technology> Technologies { get; }
@@ -25,6 +26,7 @@ namespace Core.CPU
             foreach (var technology in Technologies)
             {
                 Power += technology.Power;
+                ProducePrice += technology.ProducePrice;
                 DevelopmentPrice += technology.DevelopPrice;
                 DevelopmentPoints += technology.DevelopPoints;
             }
