@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 426486047803306127}
   - component: {fileID: 426486047803306126}
   m_Layer: 5
-  m_Name: OpenResearchPanelButton
+  m_Name: OpenResearchWindowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 426486048253489088}
   - component: {fileID: 426486048253489095}
   m_Layer: 5
-  m_Name: OpenDevelopmentPanelButton
+  m_Name: OpenDevelopmentWindowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 426486048314537102}
   - component: {fileID: 426486048314537101}
   m_Layer: 5
-  m_Name: OpenOfficePanelButton
+  m_Name: OpenOfficeWindowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1835,7 +1835,7 @@ GameObject:
   - component: {fileID: 426486049322832717}
   - component: {fileID: 426486049322832716}
   m_Layer: 5
-  m_Name: TestButton
+  m_Name: OpenMarketingWindowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Marketing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2825,6 +2825,7 @@ MonoBehaviour:
   _openResearchWindowButton: {fileID: 426486047803306126}
   _openDevelopmentWindowButton: {fileID: 426486048253489095}
   _openOfficeWindowButton: {fileID: 426486048314537101}
+  _openMarketingWindowButton: {fileID: 426486049322832716}
   _dateTextFormat: dd.MM.yyyy
   _companyNameTextFormat: '{0}'
   _moneyTextFormat: '{0}$'

@@ -21,6 +21,7 @@ namespace Core.UI.Windows
         [SerializeField] private Button _openResearchWindowButton;
         [SerializeField] private Button _openDevelopmentWindowButton;
         [SerializeField] private Button _openOfficeWindowButton;
+        [SerializeField] private Button _openMarketingWindowButton;
 
         //TODO change text to custom number view or something like that
         [Header("Texts")]
@@ -48,6 +49,7 @@ namespace Core.UI.Windows
             _openResearchWindowButton.onClick.AddListener(OnOpenResearchWindowButtonClicked);
             _openDevelopmentWindowButton.onClick.AddListener(OnOpenDevelopmentWindowButtonClicked);
             _openOfficeWindowButton.onClick.AddListener(OnOpenOfficeWindowButtonClicked);
+            _openMarketingWindowButton.onClick.AddListener(OnOpenMarketingWindowButtonClicked);
         }
 
         [Inject]
@@ -111,6 +113,10 @@ namespace Core.UI.Windows
         {
             _uiService.ShowWindow<OfficeWindow>();
         }
+        private void OnOpenMarketingWindowButtonClicked()
+        {
+            _uiService.ShowWindow<MarketingWindow>();
+        }
 
         #endregion
         
@@ -122,7 +128,7 @@ namespace Core.UI.Windows
         }
         private void OnMoneyChanged(int money)
         {
-            _moneyTextObject.text = string.Format(_moneyTextFormat, money);
+            _moneyTextObject.text = $"${money:#,##0}".Replace(",", " ");;
         }
         
         #endregion

@@ -22,5 +22,9 @@ MonoBehaviour:
     type: 3}
   <OfficeWindow>k__BackingField: {fileID: 607288682318018591, guid: a43bd6296e873894ab4eee26cadba1e0,
     type: 3}
+  <MarketingWindow>k__BackingField: {fileID: 601956254320181301, guid: 7265210b857437046b71bcb91c394dd1,
+    type: 3}
   <TechnologyView>k__BackingField: {fileID: -8092261342021120046, guid: 2f39596bb651b0a4dbc0d0f2b94e959a,
+    type: 3}
+  <AdView>k__BackingField: {fileID: 8610303618691704684, guid: 87615133b6950954c91754ea2052280c,
     type: 3}

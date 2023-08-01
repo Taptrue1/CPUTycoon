@@ -28,6 +28,10 @@ namespace Core.UI
         {
             return Object.Instantiate(_uiSettings.TechnologyView, parent);
         }
+        public AdView CreateAdView(Transform parent)
+        {
+            return Object.Instantiate(_uiSettings.AdView, parent);
+        }
         
         private WindowPresenter CreateWindow(WindowPresenter windowPrefab)
         {

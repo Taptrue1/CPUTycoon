@@ -24,4 +24,6 @@ MonoBehaviour:
     type: 2}
   <TeamSettings>k__BackingField: {fileID: 11400000, guid: 6552c979735afc64e9eec0c1f2a56d69,
     type: 2}
+  <MarketingSettings>k__BackingField: {fileID: 11400000, guid: e6624caf00a375e45aad755096d58d61,
+    type: 2}
   <TechTreePath>k__BackingField: Assets/Data/TechTree.json

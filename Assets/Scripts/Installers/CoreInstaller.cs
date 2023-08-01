@@ -36,7 +36,8 @@ namespace Installers
                 _coreSettings.UISettings.CoreWindow,
                 _coreSettings.UISettings.ResearchWindow,
                 _coreSettings.UISettings.DevelopmentWindow,
-                _coreSettings.UISettings.OfficeWindow
+                _coreSettings.UISettings.OfficeWindow,
+                _coreSettings.UISettings.MarketingWindow
             };
 
             Container.Bind<Canvas>().FromInstance(canvas).AsSingle();

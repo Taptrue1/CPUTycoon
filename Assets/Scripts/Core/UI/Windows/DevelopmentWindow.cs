@@ -35,13 +35,13 @@ namespace Core.UI.Windows
         [SerializeField] private Button _lockViewExitButton;
         
         [Header("Other")]
-        [SerializeField] private Transform _technologiesContainer;
+        //[SerializeField] private Transform _technologiesContainer;
         [SerializeField] private GameObject _lockedPanel;
         
         private Game _game;
         private UIService _uiService;
-        private Technology _techTreeRootNode;
-        private TechnologiesSettings _technologiesSettings;
+        private Technology _techTreeRootNode; 
+        //private TechnologiesSettings _technologiesSettings;
 
         private const string ResearchLockReason = "You need to research first {0} technologies";
         private const string DevelopmentLockReason = "Processor is in development";
@@ -59,8 +59,8 @@ namespace Core.UI.Windows
         {
             _game = game;
             _uiService = uiService;
-            _technologiesSettings = coreSettings.TechnologiesSettings;
             _techTreeRootNode = techTreeRootNode;
+            //_technologiesSettings = coreSettings.TechnologiesSettings;
         }
         public override void Show()
         {

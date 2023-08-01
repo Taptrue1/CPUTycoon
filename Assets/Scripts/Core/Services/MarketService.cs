@@ -12,6 +12,7 @@ namespace Core.Services
     public class MarketService
     {
         public event Action<ProductData> NewProductAppeared;
+        public Processor CurrentPlayerProcessor => _currentPlayerProcessor;
         
         private Processor _currentPlayerProcessor;
         private List<Processor> _processorsArchive;
