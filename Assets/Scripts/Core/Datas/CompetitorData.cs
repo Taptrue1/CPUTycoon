@@ -13,7 +13,6 @@ namespace Core.Datas
     [Serializable]
     public class ProductData
     {
-        //TODO change power to Option like in ClientGroupData
         public string Name;
         public double Price;
         public double Power;

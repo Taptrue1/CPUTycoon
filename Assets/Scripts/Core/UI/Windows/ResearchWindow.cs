@@ -152,7 +152,7 @@ namespace Core.UI.Windows
             var canResearch = referenceNodes.All(obj => obj.IsResearched());
             var technologyToResearch = canResearch ? technology : FindTechnologyToResearch(technology);
             
-            _game.SetTechnologyToResearch(technologyToResearch);
+            _game.SetResearchingTarget(technologyToResearch);
             
             UpdateViews();
         }
@@ -168,7 +168,7 @@ namespace Core.UI.Windows
         private void UpdateViews()
         {
             foreach(var view in _technologyViews)
-                view.UpdateView(_game.TechnologyToResearch);
+                view.UpdateView(_game.ResearchingTarget);
         }
         private Technology FindTechnologyToResearch(Technology selectedNode)
         {

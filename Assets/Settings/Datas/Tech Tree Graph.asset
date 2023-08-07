@@ -1,0 +1,420 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8524569275696291913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 248, y: -312}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 350KHz
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 1
+  Children:
+  - {fileID: -7961519896363923893}
+--- !u!114 &-7961519896363923893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 504, y: -312}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 500KHz
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children:
+  - {fileID: -4745617424690668060}
+--- !u!114 &-7924448167127484220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -8, y: -56}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Name: DIP 16
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 2
+  Children:
+  - {fileID: -5749230111937427201}
+--- !u!114 &-7822259679860846961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 504, y: -56}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Name: DIP 64
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 2
+  Children:
+  - {fileID: -7311635103771962920}
+  - {fileID: 6910101953450985032}
+--- !u!114 &-7311635103771962920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 760, y: -56}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Name: DIP 128
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 2
+  Children: []
+--- !u!114 &-6935451152700403115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -8, y: -568}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 10mkm
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children:
+  - {fileID: -1285444298786370661}
+--- !u!114 &-5749230111937427201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 248, y: -56}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Name: DIP 32
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 2
+  Children:
+  - {fileID: -7822259679860846961}
+--- !u!114 &-4745617424690668060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 760, y: -312}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 0}
+  Name: 1MHz
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children: []
+--- !u!114 &-1285444298786370661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 248, y: -568}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 1mkm
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children:
+  - {fileID: 1997768582710717002}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc3ad067da6481a9da706122a21da59, type: 3}
+  m_Name: Tech Tree Graph
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 800694334839760189}
+  - {fileID: -6935451152700403115}
+  - {fileID: 7814003598842860407}
+  - {fileID: -7924448167127484220}
+  - {fileID: -1285444298786370661}
+  - {fileID: -8524569275696291913}
+  - {fileID: -5749230111937427201}
+  - {fileID: 1997768582710717002}
+  - {fileID: -7961519896363923893}
+  - {fileID: -7822259679860846961}
+  - {fileID: -7311635103771962920}
+  - {fileID: 6910101953450985032}
+  - {fileID: -4745617424690668060}
+  - {fileID: 1183946429292455221}
+--- !u!114 &800694334839760189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -264, y: -312}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 0}
+  Name: ROOT
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children:
+  - {fileID: -6935451152700403115}
+  - {fileID: 7814003598842860407}
+  - {fileID: -7924448167127484220}
+--- !u!114 &1183946429292455221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 760, y: -568}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 500nm
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children: []
+--- !u!114 &1997768582710717002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 504, y: -568}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 800nm
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 0
+  Children:
+  - {fileID: 1183946429292455221}
+--- !u!114 &6910101953450985032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 760, y: 200}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Name: BGA 32
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 2
+  Children: []
+--- !u!114 &7814003598842860407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9974885a3f4a3da1e4caed1ce88ae4, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -8, y: -312}
+  ports:
+    keys: []
+    values: []
+  Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  Name: 100KHz
+  Power: 0
+  ResearchPoints: 0
+  DevelopPoints: 0
+  DevelopPrice: 0
+  ProducePrice: 0
+  Index: 0
+  Type: 1
+  Children:
+  - {fileID: -8524569275696291913}

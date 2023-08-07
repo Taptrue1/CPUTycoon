@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Core.Games;
 using Core.Services;
 using Core.Technologies;
 using Core.UI;
 using Core.UI.Windows;
+using Graphs;
 using Settings;
 using UnityEngine;
 using Zenject;
@@ -48,10 +50,7 @@ namespace Installers
         }
         private void InstallTechTreeRootNode()
         {
-            var binaryFormatter = new BinaryFormatter();
-            var file = new FileStream(_coreSettings.TechTreePath, FileMode.Open);
-            var techTree = (Technology) binaryFormatter.Deserialize(file);
-            
+            var techTree = new Technology((TechNode)_coreSettings.TechTreeGraph.nodes[0]);
             Container.Bind<Technology>().FromInstance(techTree).AsSingle();
         }
     }

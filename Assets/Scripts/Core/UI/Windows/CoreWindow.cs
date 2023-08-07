@@ -1,7 +1,9 @@
 using System;
+using Core.CPU;
 using Core.Datas;
 using Core.GameSpeedStateMachines.States;
 using Core.Services;
+using Core.Technologies;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +13,7 @@ namespace Core.UI.Windows
 {
     public class CoreWindow : WindowPresenter
     {
-        [Header("Game Speed")]
+        [Header("Game Speed Buttons")]
         [SerializeField] private Button _pauseButton;
         [SerializeField] private Button _normalSpeedButton;
         [SerializeField] private Button _fastSpeedButton;
@@ -26,13 +28,13 @@ namespace Core.UI.Windows
         //TODO change text to custom number view or something like that
         [Header("Texts")]
         [SerializeField] private string _dateTextFormat = "dd.MM.yyyy";
-        [SerializeField] private string _companyNameTextFormat = "{0}";
-        [SerializeField] private string _moneyTextFormat = "{0}$";
         [SerializeField] private TextMeshProUGUI _dateTextObject;
         [SerializeField] private TextMeshProUGUI _companyNameTextObject;
         [SerializeField] private TextMeshProUGUI _moneyTextObject;
 
         [Header("Other")]
+        [SerializeField] private Transform _newsContainer;
+        [SerializeField] private Transform _actionsContainer;
         [SerializeField] private CurrencyData _moneyCurrencyData;
         
         private TimeService _timeService;
@@ -126,9 +128,35 @@ namespace Core.UI.Windows
         {
             _dateTextObject.text = date.ToString(_dateTextFormat);
         }
-        private void OnMoneyChanged(int money)
+        private void OnMoneyChanged(double money)
         {
             _moneyTextObject.text = $"${money:#,##0}".Replace(",", " ");;
+        }
+        private void OnNewsAppeared()
+        {
+            
+        }
+        private void OnResearchingTargetChanged(Technology technology)
+        {
+            if (technology == null)
+            {
+                //TODO delete researching action view
+                return;
+            }
+            //TODO create researching action view
+        }
+        private void OnDevelopingTargetChanged(Processor processor)
+        {
+            if (processor == null)
+            {
+                //TODO delete developing action view
+                return;
+            }
+            //TODO create developing action view
+        }
+        private void OnProcessorSelling()
+        {
+            
         }
         
         #endregion

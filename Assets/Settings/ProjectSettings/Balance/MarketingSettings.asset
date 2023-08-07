@@ -35,12 +35,17 @@ MonoBehaviour:
     <SalesMultiplier>k__BackingField: 1.8
   _adDurations:
   - <Name>k__BackingField: 10 Days
+    <Duration>k__BackingField: 10
     <PriceMultiplier>k__BackingField: 1
   - <Name>k__BackingField: 20 Days
+    <Duration>k__BackingField: 20
     <PriceMultiplier>k__BackingField: 2
   - <Name>k__BackingField: 30 Days
+    <Duration>k__BackingField: 30
     <PriceMultiplier>k__BackingField: 3
   - <Name>k__BackingField: 40 Days
+    <Duration>k__BackingField: 40
     <PriceMultiplier>k__BackingField: 4
   - <Name>k__BackingField: 50 Days
+    <Duration>k__BackingField: 50
     <PriceMultiplier>k__BackingField: 5

@@ -1,3 +1,4 @@
+using Graphs;
 using UnityEngine;
 
 namespace Settings
@@ -12,6 +13,6 @@ namespace Settings
         [field: SerializeField] public TechnologiesSettings TechnologiesSettings { get; private set; }
         [field: SerializeField] public TeamSettings TeamSettings { get; private set; }
         [field: SerializeField] public MarketingSettings MarketingSettings { get; private set; }
-        [field: SerializeField] public string TechTreePath { get; private set; }
+        [field: SerializeField] public TechTreeGraph TechTreeGraph { get; private set; }
     }
 }

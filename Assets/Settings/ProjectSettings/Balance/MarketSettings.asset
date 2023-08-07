@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ClientsCount>k__BackingField:
     <DefaultValue>k__BackingField: 100000
-    <GrowthValue>k__BackingField: 500000
+    <GrowthValue>k__BackingField: 1369
     <ProgressionType>k__BackingField: 0
   <ClientGroups>k__BackingField:
   - <Priority>k__BackingField: 0
-    <ClientsPercentage>k__BackingField: 70
+    <ClientsPercentage>k__BackingField: 40
   - <Priority>k__BackingField: 1
-    <ClientsPercentage>k__BackingField: 20
+    <ClientsPercentage>k__BackingField: 50
   - <Priority>k__BackingField: 2
     <ClientsPercentage>k__BackingField: 10
   <Competitors>k__BackingField:

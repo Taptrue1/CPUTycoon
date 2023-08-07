@@ -17,7 +17,7 @@ namespace Settings
     public class ClientGroup
     {
         [field: SerializeField] public PriorityType Priority { get; set; }
-        [field: SerializeField] public int ClientsPercentage { get; set; } 
+        [field: SerializeField] public int ClientsPercentage { get; set; }
     }
 
     public enum PriorityType

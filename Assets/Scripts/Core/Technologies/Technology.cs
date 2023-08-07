@@ -1,27 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Graphs;
 
 namespace Core.Technologies
 {
     [Serializable]
     public class Technology
     {
-        public string Name;
-        public int Power;
-        public int ResearchPoints;
-        public int DevelopPoints;
-        public int DevelopPrice;
-        public int ProducePrice;
-        public int Index;
-        public TechnologyType Type;
-        public List<Technology> Children;
+        public string Name { get; }
+        public int Power { get; }
+        public int ResearchPoints { get; }
+        public int DevelopPoints { get; }
+        public int DevelopPrice { get; }
+        public int ProducePrice { get; }
+        public int Index { get; }
+        public TechnologyType Type { get; }
+        public List<Technology> Children { get; }
         
         private bool _isResearched;
 
-        public Technology(string name)
+        public Technology(TechNode techNode)
         {
-            Name = name;
-            Children = new List<Technology>();
+            Name = techNode.Name;
+            Power = techNode.Power;
+            ResearchPoints = techNode.ResearchPoints;
+            DevelopPoints = techNode.DevelopPoints;
+            DevelopPrice = techNode.DevelopPrice;
+            ProducePrice = techNode.ProducePrice;
+            Index = techNode.Index;
+            Type = techNode.Type;
+            Children = techNode.Children.Select(child => new Technology(child)).ToList();
         }
         public void Research()
         {

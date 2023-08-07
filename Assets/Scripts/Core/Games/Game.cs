@@ -10,12 +10,14 @@ namespace Core.Games
     public class Game
     {
         public event Action<Processor> ProcessorDeveloped;
+        public event Action<Technology> ResearchingTargetChanged;
+        public event Action<Processor> DevelopingTargetChanged;
 
-        public Processor ProcessorToDevelop => _processorToDevelop;
-        public Technology TechnologyToResearch => _technologyToResearch;
+        public Processor DevelopingTarget => _developingTarget;
+        public Technology ResearchingTarget => _researchingTarget;
         
-        private Processor _processorToDevelop;
-        private Technology _technologyToResearch;
+        private Processor _developingTarget;
+        private Technology _researchingTarget;
         private readonly CurrencyService _currencyService;
 
         [Inject]
@@ -25,13 +27,15 @@ namespace Core.Games
 
             timeService.Tick += OnTick;
         }
-        public void SetTechnologyToResearch(Technology technology)
+        public void SetResearchingTarget(Technology technology)
         {
-            _technologyToResearch = technology;
+            _researchingTarget = technology;
+            ResearchingTargetChanged?.Invoke(technology);
         }
-        public void SetProcessorToDevelop(Processor processor)
+        public void SetDevelopingTarget(Processor processor)
         {
-            _processorToDevelop = processor;
+            _developingTarget = processor;
+            DevelopingTargetChanged?.Invoke(processor);
         }
 
         #region Callbacks
@@ -42,22 +46,24 @@ namespace Core.Games
             var researchPoints = _currencyService.GetCurrency("RP");
             var developmentPoints = _currencyService.GetCurrency("DP");
 
-            if(_technologyToResearch != null)
+            if(_researchingTarget != null)
             {
                 Debug.Log("Researching...");
-                if (_technologyToResearch.ResearchPoints > researchPoints.Value) return;
+                if (_researchingTarget.ResearchPoints > researchPoints.Value) return;
                 researchPoints.Value = 0;
-                _technologyToResearch.Research();
-                _technologyToResearch = null;
+                _researchingTarget.Research();
+                _researchingTarget = null;
+                ResearchingTargetChanged?.Invoke(null);
                 Debug.Log("Researched!");
             }
-            if(_processorToDevelop != null)
+            if(_developingTarget != null)
             {
                 Debug.Log("Developing...");
-                if (_processorToDevelop.DevelopmentPoints > developmentPoints.Value) return;
+                if (_developingTarget.DevelopmentPoints > developmentPoints.Value) return;
                 developmentPoints.Value = 0;
-                ProcessorDeveloped?.Invoke(_processorToDevelop);
-                _processorToDevelop = null;
+                ProcessorDeveloped?.Invoke(_developingTarget);
+                _developingTarget = null;
+                DevelopingTargetChanged?.Invoke(null);
                 Debug.Log("Developed!");
             }
         }

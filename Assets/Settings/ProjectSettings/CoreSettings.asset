@@ -26,4 +26,5 @@ MonoBehaviour:
     type: 2}
   <MarketingSettings>k__BackingField: {fileID: 11400000, guid: e6624caf00a375e45aad755096d58d61,
     type: 2}
-  <TechTreePath>k__BackingField: Assets/Data/TechTree.json
+  <TechTreeGraph>k__BackingField: {fileID: 11400000, guid: 7d85a6167fc5574428c28df11c879c85,
+    type: 2}

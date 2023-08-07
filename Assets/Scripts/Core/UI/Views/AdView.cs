@@ -12,12 +12,9 @@ namespace Core.UI.Views
     {
         public event Action<AdData, bool> SelectionChanged;
 
-        [Header("Scale Animation Settings")]
-        [SerializeField] private float _defaultScale = 1;
-        [SerializeField] private float _extendedScale = 1.2f;
-        
         [Header("Dependencies")]
         [SerializeField] private Image _icon;
+        [SerializeField] private Image _selectedIcon;
         [SerializeField] private TextMeshProUGUI _nameTextObject;
         [SerializeField] private TextMeshProUGUI _priceTextObject;
 
@@ -42,21 +39,15 @@ namespace Core.UI.Views
         public void ResetView()
         {
             _isSelected = false;
-            Scale();
+            _selectedIcon.gameObject.SetActive(_isSelected);
             SelectionChanged?.Invoke(_adData, _isSelected);
         }
 
         private void OnButtonClick()
         {
             _isSelected = !_isSelected;
-            Scale();
+            _selectedIcon.gameObject.SetActive(_isSelected);
             SelectionChanged?.Invoke(_adData, _isSelected);
         }
-        private void Scale()
-        {
-            //_layoutElement.flexibleWidth = _isSelected ? _extendedScale : _defaultScale;
-            //_layoutElement.flexibleHeight = _isSelected ? _extendedScale : _defaultScale;
-        }
-        
     }
 }

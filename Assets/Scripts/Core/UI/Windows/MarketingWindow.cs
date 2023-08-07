@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Datas;
 using Core.Marketing;
 using Core.Services;
 using Core.UI.Views;
@@ -20,15 +21,18 @@ namespace Core.UI.Windows
         [SerializeField] private Transform _adViewsContainer;
         [SerializeField] private AdDurationView _adDurationView;
         [SerializeField] private TextMeshProUGUI _totalPriceTextObject;
+        [SerializeField] private CurrencyData _moneyCurrencyData;
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _acceptButton;
 
         private int _selectedDurationIndex;
+        private double _adsTotalPrice;
         private List<AdData> _selectedAds = new();
         private List<AdView> _adViews = new();
         private UIFactory _uiFactory;
         private UIService _uiService;
         private MarketService _marketService;
+        private CurrencyService _currencyService;
         private MarketingSettings _marketingSettings;
 
         private void Awake()
@@ -39,11 +43,12 @@ namespace Core.UI.Windows
 
         [Inject]
         public void InjectDependencies(UIFactory uiFactory, UIService uiService, MarketService marketService,
-            CoreSettings coreSettings)
+            CurrencyService currencyService, CoreSettings coreSettings)
         {
             _uiFactory = uiFactory;
             _uiService = uiService;
             _marketService = marketService;
+            _currencyService = currencyService;
             _marketingSettings = coreSettings.MarketingSettings;
             _adDurationView.Init(_marketingSettings);
             _adDurationView.DurationChanged += OnDurationChanged;
@@ -64,12 +69,15 @@ namespace Core.UI.Windows
         }
         private void OnAcceptButtonClicked()
         {
-            //TODO subtract money and  and close current window
+            var totalSalesBonus = _selectedAds.Sum(ad => ad.SalesMultiplier);
+            _currencyService.GetCurrency(_moneyCurrencyData.Name).Value -= _adsTotalPrice;
+            _marketService.ActivateAdBonus(totalSalesBonus, _marketingSettings.AdDurations[_selectedDurationIndex].Duration);
             _uiService.ShowWindow<CoreWindow>();
         }
         private void OnDurationChanged(int durationIndex)
         {
             _selectedDurationIndex = durationIndex;
+            UpdateTotalPrice();
             UpdateInformation();
         }
         private void OnSelectionChanged(AdData adData, bool isSelected)
@@ -78,8 +86,10 @@ namespace Core.UI.Windows
                 _selectedAds.Add(adData);
             else
                 _selectedAds.Remove(adData);
-            _acceptButton.interactable = _selectedAds.Count > 0 && _marketService.CurrentPlayerProcessor != null;
+            UpdateTotalPrice();
             UpdateInformation();
+            _acceptButton.interactable = _selectedAds.Count > 0 && _marketService.PlayerProduct != null &&
+                                         _currencyService.GetCurrency(_moneyCurrencyData.Name).Value >= _adsTotalPrice;
         }
         #endregion
         
@@ -94,11 +104,14 @@ namespace Core.UI.Windows
                 _adViews.Add(adView);
             }
         }
+        private void UpdateTotalPrice()
+        {
+            _adsTotalPrice = _selectedAds.Sum(ad => ad.Price) *
+                             _marketingSettings.AdDurations[_selectedDurationIndex].PriceMultiplier;
+        }
         private void UpdateInformation()
         {
-            var totalPrice = _selectedAds.Sum(ad => ad.Price) *
-                             _marketingSettings.AdDurations[_selectedDurationIndex].PriceMultiplier;
-            var formattedTotalPrice = $"{totalPrice:#,##0}".Replace(",", " ");
+            var formattedTotalPrice = $"{_adsTotalPrice:#,##0}".Replace(",", " ");
             _totalPriceTextObject.text = string.Format(_totalPriceFormat, Environment.NewLine, formattedTotalPrice);
         }
         #endregion

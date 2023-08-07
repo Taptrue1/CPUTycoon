@@ -7,6 +7,7 @@ namespace Core.Marketing
     public class AdDuration
     {
         [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public int Duration { get; private set; }
         [field: SerializeField] public double PriceMultiplier { get; private set; }
     }
 }

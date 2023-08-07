@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.CPU;
+using Core.Datas;
 using Core.Games;
 using Core.Services;
 using Core.Technologies;
@@ -27,19 +28,23 @@ namespace Core.UI.Windows
         [SerializeField] private TMP_Dropdown _bitsDropdown;
 
         [Header("Text Objects")]
+        [SerializeField] private TextMeshProUGUI _processorInfoTextObject;
         [SerializeField] private TextMeshProUGUI _lockReasonTextObject;
 
         [Header("Buttons")]
         [SerializeField] private Button _exitButton;
         [SerializeField] private Button _developButton;
         [SerializeField] private Button _lockViewExitButton;
-        
+
         [Header("Other")]
+        [SerializeField] private CurrencyData _moneyCurrencyData;
         //[SerializeField] private Transform _technologiesContainer;
         [SerializeField] private GameObject _lockedPanel;
         
         private Game _game;
         private UIService _uiService;
+        private TeamService _teamService;
+        private CurrencyService _currencyService;
         private Technology _techTreeRootNode; 
         //private TechnologiesSettings _technologiesSettings;
 
@@ -48,6 +53,11 @@ namespace Core.UI.Windows
 
         private void Awake()
         {
+            _techProcessDropdown.onValueChanged.AddListener(OnDropdownChanged);
+            _frequencyDropdown.onValueChanged.AddListener(OnDropdownChanged);
+            _formFactorDropdown.onValueChanged.AddListener(OnDropdownChanged);
+            _ramDropdown.onValueChanged.AddListener(OnDropdownChanged);
+            _bitsDropdown.onValueChanged.AddListener(OnDropdownChanged);
             _developButton.onClick.AddListener(OnDevelopButtonClicked);
             _developButton.onClick.AddListener(OnExitButtonClicked);
             _exitButton.onClick.AddListener(OnExitButtonClicked);
@@ -55,10 +65,13 @@ namespace Core.UI.Windows
         }
 
         [Inject]
-        public void InjectDependencies(Game game, UIService uiService, CoreSettings coreSettings, Technology techTreeRootNode)
+        public void InjectDependencies(Game game, UIService uiService, TeamService teamService,
+            CurrencyService currencyService, CoreSettings coreSettings, Technology techTreeRootNode)
         {
             _game = game;
             _uiService = uiService;
+            _teamService = teamService;
+            _currencyService = currencyService;
             _techTreeRootNode = techTreeRootNode;
             //_technologiesSettings = coreSettings.TechnologiesSettings;
         }
@@ -67,7 +80,7 @@ namespace Core.UI.Windows
             base.Show();
             
             var isAllChildsResearched = _techTreeRootNode.Children.All(child => child.IsResearched());
-            var isProcessorInDevelopment = _game.ProcessorToDevelop != null;
+            var isProcessorInDevelopment = _game.DevelopingTarget != null;
             var canActivateLockView = !isAllChildsResearched || isProcessorInDevelopment;
             var reason = isAllChildsResearched ? DevelopmentLockReason : ResearchLockReason;
             SetLockView(canActivateLockView, string.Format(reason, _techTreeRootNode.Children.Count));
@@ -78,26 +91,23 @@ namespace Core.UI.Windows
             _priceInputField.text = string.Empty;
             
             SetupDropdowns();
+            UpdateInfo();
         }
         
         #region Callbacks
-        
+
+        private void OnDropdownChanged(int value)
+        {
+            UpdateInfo();
+        }
         private void OnDevelopButtonClicked()
         {
             var name = _nameInputField.text;
             var sellPrice = int.Parse(_priceInputField.text);
-            var techs = new List<Technology>()
-            {
-                GetTechnology(TechnologyType.TechProcess, _techProcessDropdown.value),
-                GetTechnology(TechnologyType.Frequency, _frequencyDropdown.value),
-                GetTechnology(TechnologyType.FormFactor, _formFactorDropdown.value),
-                GetTechnology(TechnologyType.Ram, _ramDropdown.value),
-                GetTechnology(TechnologyType.Bitness, _bitsDropdown.value)
-                //TODO add other tech types
-            };
-            techs.RemoveAll(tech => tech == null);
-            
-            _game.SetProcessorToDevelop(new Processor(name, sellPrice, techs));
+            var selectedTechnologies = GetSelectedTechnologies();
+            var developingPrice = selectedTechnologies.Sum(technology => technology.DevelopPrice);
+            _currencyService.GetCurrency(_moneyCurrencyData.Name).Value -= developingPrice;
+            _game.SetDevelopingTarget(new Processor(name, sellPrice, selectedTechnologies));
         }
         private void OnExitButtonClicked()
         {
@@ -165,6 +175,22 @@ namespace Core.UI.Windows
             _lockedPanel.SetActive(active);
             _lockReasonTextObject.text = reason;
         }
+        private void UpdateInfo()
+        {
+            var totalDpGeneration = _teamService.HiredProgrammers.Sum(programmer => programmer.PointsGeneration);
+            var selectedTechnologies = GetSelectedTechnologies();
+            var totalProducePrice = selectedTechnologies.Sum(technology => technology.ProducePrice);
+            var totalDevelopmentPrice = selectedTechnologies.Sum(technology => technology.DevelopPrice);
+            var totalDevelopmentPoints = selectedTechnologies.Sum(technology => technology.DevelopPoints);
+            var developmentDuration = Mathf.CeilToInt(totalDevelopmentPoints / totalDpGeneration);
+            var canBuyDeveloping = _currencyService.GetCurrency(_moneyCurrencyData.Name).Value > totalDevelopmentPrice;
+
+            _developButton.interactable = canBuyDeveloping && _nameInputField.text != string.Empty &&
+                                          _priceInputField.text != string.Empty;
+            _processorInfoTextObject.text = $"Produce price ${totalProducePrice}\n" +
+                                            $"Development price ${totalDevelopmentPrice}\n" +
+                                            $"Development takes {developmentDuration} days";
+        }
         private List<Technology> GetResearchedTechnologies()
         {
             var researchedTechnologies = new List<Technology>();
@@ -182,6 +208,19 @@ namespace Core.UI.Windows
                 currentTechnologies = newTechnologies;
             }
             return researchedTechnologies;
+        }
+        private List<Technology> GetSelectedTechnologies()
+        {
+            var selectedTechnologies = new List<Technology>()
+            {
+                GetTechnology(TechnologyType.TechProcess, _techProcessDropdown.value),
+                GetTechnology(TechnologyType.Frequency, _frequencyDropdown.value),
+                GetTechnology(TechnologyType.FormFactor, _formFactorDropdown.value),
+                GetTechnology(TechnologyType.Ram, _ramDropdown.value),
+                GetTechnology(TechnologyType.Bitness, _bitsDropdown.value)
+                //TODO add other tech types
+            };
+            return selectedTechnologies.Where(tech => tech != null).ToList();
         }
         private Technology GetTechnology(TechnologyType type, int index)
         {

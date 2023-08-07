@@ -6,16 +6,16 @@ namespace Core.Services
 {
     public class CurrencyService
     {
-        private readonly Dictionary<string, CustomNumber<int>> _currencies;
+        private readonly Dictionary<string, CustomNumber<double>> _currencies;
         
         public CurrencyService(CoreSettings coreSettings)
         {
-            _currencies = new Dictionary<string, CustomNumber<int>>();
+            _currencies = new Dictionary<string, CustomNumber<double>>();
             
             foreach (var currencyData in coreSettings.CurrencySettings.CurrenciesDatas)
-                _currencies.Add(currencyData.Name, new CustomNumber<int>(currencyData.StartValue));
+                _currencies.Add(currencyData.Name, new CustomNumber<double>(currencyData.StartValue));
         }
-        public CustomNumber<int> GetCurrency(string name)
+        public CustomNumber<double> GetCurrency(string name)
         {
             if(!_currencies.ContainsKey(name))
                 throw new KeyNotFoundException($"Currency with name {name} not found");
