@@ -6,6 +6,8 @@ namespace Core.Team
 {
     public class Office : MonoBehaviour
     {
+        [field: SerializeField] public double Price { get; private set; }
+        [field: SerializeField] public Transform[] WorkersPlaces { get; private set; }
         [field: SerializeField] public Transform[] ScientistsPlaces { get; private set; }
         [field: SerializeField] public Transform[] ProgrammersPlaces { get; private set; }
         
