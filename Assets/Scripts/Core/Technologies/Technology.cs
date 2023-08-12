@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Graphs;
+using UnityEngine;
 
 namespace Core.Technologies
 {
     [Serializable]
     public class Technology
     {
+        public Sprite Icon { get; }
         public string Name { get; }
         public int Power { get; }
-        public int ResearchPoints { get; }
-        public int DevelopPoints { get; }
         public int DevelopPrice { get; }
         public int ProducePrice { get; }
+        public int ResearchPointsPrice { get; }
+        public int DevelopPointsPrice { get; }
         public int Index { get; }
         public TechnologyType Type { get; }
         public List<Technology> Children { get; }
@@ -22,10 +24,11 @@ namespace Core.Technologies
 
         public Technology(TechNode techNode)
         {
+            Icon = techNode.Icon;
             Name = techNode.Name;
             Power = techNode.Power;
-            ResearchPoints = techNode.ResearchPoints;
-            DevelopPoints = techNode.DevelopPoints;
+            ResearchPointsPrice = techNode.ResearchPoints;
+            DevelopPointsPrice = techNode.DevelopPoints;
             DevelopPrice = techNode.DevelopPrice;
             ProducePrice = techNode.ProducePrice;
             Index = techNode.Index;

@@ -100,9 +100,9 @@ namespace Core.UI.Windows
         private void OnWorkerViewClicked(Worker worker)
         {
             var isHiredScientist = _teamService.HiredScientists.Contains(worker);
-            var isHiredProgrammer = _teamService.HiredProgrammers.Contains(worker);
+            var isHiredProgrammer = _teamService.HiredEngineers.Contains(worker);
             var isFreeScientist = _teamService.FreeScientists.Contains(worker);
-            var isFreeProgrammer = _teamService.FreeProgrammers.Contains(worker);
+            var isFreeProgrammer = _teamService.FreeEngineers.Contains(worker);
             var canHireScientist = _hiredScientistsViews.Count < _teamService.Office.ScientistsPlaces.Length;
             var canHireProgrammer = _hiredProgrammersViews.Count < _teamService.Office.ProgrammersPlaces.Length;
 
@@ -127,7 +127,7 @@ namespace Core.UI.Windows
         {
             _freeProgrammersViews ??= new List<WorkerView>();
             _freeScientistsViews ??= new List<WorkerView>();
-            foreach (var worker in _teamService.FreeProgrammers)
+            foreach (var worker in _teamService.FreeEngineers)
             {
                 var workerView = Instantiate(_workerViewPrefab, _freeProgrammersContainer);
                 workerView.Init(worker);
@@ -160,9 +160,9 @@ namespace Core.UI.Windows
         private void UpdateOfficeInformation()
         {
             var rpProducing = _teamService.HiredScientists.Sum(worker => worker.PointsGeneration);
-            var dpProducing = _teamService.HiredProgrammers.Sum(worker => worker.PointsGeneration);
+            var dpProducing = _teamService.HiredEngineers.Sum(worker => worker.PointsGeneration);
             var totalSalary = _teamService.HiredScientists.Sum(worker => worker.Salary) +
-                              _teamService.HiredProgrammers.Sum(worker => worker.Salary);
+                              _teamService.HiredEngineers.Sum(worker => worker.Salary);
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(string.Format(_officeLevelTextFormat, _teamService.OfficeLevel));
             stringBuilder.AppendLine(string.Format(_scientistsPlacesTextFormat,
@@ -195,7 +195,7 @@ namespace Core.UI.Windows
             view.transform.parent = _freeProgrammersContainer;
             _hiredProgrammersViews.Remove(view);
             _freeProgrammersViews.Add(view);
-            _teamService.FireProgrammer(worker);
+            _teamService.FireEngineer(worker);
         }
         private void HireScientist(Worker worker)
         {
@@ -211,7 +211,7 @@ namespace Core.UI.Windows
             view.transform.parent = _programmersContainer;
             _freeProgrammersViews.Remove(view);
             _hiredProgrammersViews.Add(view);
-            _teamService.HireProgrammer(worker);
+            _teamService.HireEngineer(worker);
         }
 
         #endregion

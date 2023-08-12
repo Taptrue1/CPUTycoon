@@ -177,11 +177,11 @@ namespace Core.UI.Windows
         }
         private void UpdateInfo()
         {
-            var totalDpGeneration = _teamService.HiredProgrammers.Sum(programmer => programmer.PointsGeneration);
+            var totalDpGeneration = _teamService.HiredEngineers.Sum(programmer => programmer.PointsGeneration);
             var selectedTechnologies = GetSelectedTechnologies();
             var totalProducePrice = selectedTechnologies.Sum(technology => technology.ProducePrice);
             var totalDevelopmentPrice = selectedTechnologies.Sum(technology => technology.DevelopPrice);
-            var totalDevelopmentPoints = selectedTechnologies.Sum(technology => technology.DevelopPoints);
+            var totalDevelopmentPoints = selectedTechnologies.Sum(technology => technology.DevelopPointsPrice);
             var developmentDuration = Mathf.CeilToInt(totalDevelopmentPoints / totalDpGeneration);
             var canBuyDeveloping = _currencyService.GetCurrency(_moneyCurrencyData.Name).Value > totalDevelopmentPrice;
 

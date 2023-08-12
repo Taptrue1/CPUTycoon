@@ -13,9 +13,9 @@ namespace Core.Services
         public int OfficeLevel { get; private set; }
         public Office Office { get; private set; }
         public List<Worker> HiredScientists { get; }
-        public List<Worker> HiredProgrammers { get; }
+        public List<Worker> HiredEngineers { get; }
         public List<Worker> FreeScientists { get; }
-        public List<Worker> FreeProgrammers { get; }
+        public List<Worker> FreeEngineers { get; }
 
         private int _lastSalaryMonth;
         private DateTime _lastFreeWorkersGenerationTime;
@@ -33,9 +33,9 @@ namespace Core.Services
             OfficeLevel = 1;
             Office = InstantiateOffice(_teamSettings.Offices[0]);
             HiredScientists = new List<Worker>();
-            HiredProgrammers = new List<Worker>();
+            HiredEngineers = new List<Worker>();
             FreeScientists = new List<Worker>();
-            FreeProgrammers = new List<Worker>();
+            FreeEngineers = new List<Worker>();
             
             _timeService.Tick += OnTick;
             
@@ -52,7 +52,7 @@ namespace Core.Services
             OfficeLevel++;
             foreach(var scientist in HiredScientists)
                 Office.AddScientist(scientist);
-            foreach(var programmer in HiredProgrammers)
+            foreach(var programmer in HiredEngineers)
                 Office.AddProgrammer(programmer);
         }
         public void HireScientist(Worker worker)
@@ -61,10 +61,10 @@ namespace Core.Services
             HiredScientists.Add(worker);
             Office.AddScientist(worker);
         }
-        public void HireProgrammer(Worker worker)
+        public void HireEngineer(Worker worker)
         {
             if(!CanHireProgrammer()) throw new Exception("Can't hire programmer");
-            HiredProgrammers.Add(worker);
+            HiredEngineers.Add(worker);
             Office.AddProgrammer(worker);
         }
         public void FireScientist(Worker worker)
@@ -73,10 +73,10 @@ namespace Core.Services
             HiredScientists.Remove(worker);
             Office.RemoveScientist(worker);
         }
-        public void FireProgrammer(Worker worker)
+        public void FireEngineer(Worker worker)
         {
-            if (!HiredProgrammers.Contains(worker)) throw new Exception("Can't fire programmer");
-            HiredProgrammers.Remove(worker);
+            if (!HiredEngineers.Contains(worker)) throw new Exception("Can't fire programmer");
+            HiredEngineers.Remove(worker);
             Office.RemoveProgrammer(worker);
         }
 
@@ -91,7 +91,7 @@ namespace Core.Services
         }
         public bool CanHireProgrammer()
         {
-            return Office.ProgrammersPlaces.Length > HiredProgrammers.Count;
+            return Office.ProgrammersPlaces.Length > HiredEngineers.Count;
         }
 
         #region Callbacks
@@ -109,7 +109,7 @@ namespace Core.Services
         private void EarnPoints()
         {
             var scientistsPointsGeneration = HiredScientists.Select(worker => worker.PointsGeneration).Sum();
-            var programmersPointsGeneration = HiredProgrammers.Select(worker => worker.PointsGeneration).Sum();
+            var programmersPointsGeneration = HiredEngineers.Select(worker => worker.PointsGeneration).Sum();
             _currencyService.GetCurrency("RP").Value += scientistsPointsGeneration;
             _currencyService.GetCurrency("DP").Value += programmersPointsGeneration;
             Debug.Log($"Earned {scientistsPointsGeneration} RP and {programmersPointsGeneration} DP");
@@ -121,7 +121,7 @@ namespace Core.Services
         private void PaySalaries()
         {
             var scientistsSalary = HiredScientists.Select(worker => worker.Salary).Sum();
-            var programmersSalary = HiredProgrammers.Select(worker => worker.Salary).Sum();
+            var programmersSalary = HiredEngineers.Select(worker => worker.Salary).Sum();
             _currencyService.GetCurrency("Money").Value -= scientistsSalary + programmersSalary;
             _lastSalaryMonth = _timeService.CurrentDate.Month;
         }
@@ -132,7 +132,7 @@ namespace Core.Services
         }
         private void GenerateFreeWorkers()
         {
-            FreeProgrammers.Clear();
+            FreeEngineers.Clear();
             FreeScientists.Clear();
             for(var i = 0; i < _teamSettings.FreeWorkersCount * 2; i++)
             {
@@ -147,7 +147,7 @@ namespace Core.Services
                 var icon = _teamSettings.WorkerPairs[workerIndex].Icon;
                 var worker = new Worker(name, surname, age, salary, pointsGeneration, icon, workerView);
                 if(i < _teamSettings.FreeWorkersCount)
-                    FreeProgrammers.Add(worker);
+                    FreeEngineers.Add(worker);
                 else
                     FreeScientists.Add(worker);
             }

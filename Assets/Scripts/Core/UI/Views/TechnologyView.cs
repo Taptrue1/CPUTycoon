@@ -35,7 +35,7 @@ namespace Core.UI.Views
             _icon.sprite = icon;
             _technology = technology;
             _nameTextObject.text = technology.Name;
-            _priceTextObject.text = technology.ResearchPoints.ToString();
+            _priceTextObject.text = technology.ResearchPointsPrice.ToString();
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnButtonClicked);
             

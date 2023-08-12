@@ -78,24 +78,21 @@ namespace Core.Services
         }
         private double CalculatePlayerIncome()
         {
-            var playerProductCoeffs = _playerProduct.Power / _playerProduct.SellPrice;
             var activeProfuctsCoeffs = _activeProducts.Sum(product => product.Power / product.Price);
-            var totalProductsCoeffs = activeProfuctsCoeffs + playerProductCoeffs;
+            var totalProductsCoeffs = activeProfuctsCoeffs + _playerProduct.BenefitRatio;
             var clientsCount = _marketSettings.ClientsCount.GetProgressionValue(_daysPassed);
             var clientsPerDay = _adDuration > 0 ? clientsCount / 365 * _adMultiplier : clientsCount / 365;
-            var totalPlayerClients = playerProductCoeffs / totalProductsCoeffs * clientsPerDay;
-            var playerWaste = _playerProduct.ProducePrice * totalPlayerClients;
-            var playerIncome = _playerProduct.SellPrice * totalPlayerClients;
-            var playerProfit = Math.Ceiling(playerIncome - playerWaste);
-            _maxPlayerProductSales = Math.Max(_maxPlayerProductSales, totalPlayerClients);
-            if (totalPlayerClients <= _maxPlayerProductSales / 10)
-            {
-                _playerProductsArchive.Add(_playerProduct);
-                _playerProduct = null;
-                PlayerProductChanged?.Invoke(null);
-            }
-            Debug.Log($"Player waste {_playerProduct.ProducePrice} * {clientsPerDay} = {playerWaste}\n" +
-                      $"Player income {_playerProduct.SellPrice} * {playerProductCoeffs} / {totalProductsCoeffs} * {clientsPerDay} = {playerIncome}");
+            var totalPlayerClients = _playerProduct.BenefitRatio / totalProductsCoeffs * clientsPerDay;
+            var playerProfit = Math.Ceiling(_playerProduct.PerUnitProfit * totalPlayerClients);
+            //TODO: Move it to another place
+            //_maxPlayerProductSales = Math.Max(_maxPlayerProductSales, totalPlayerClients);
+            //if (totalPlayerClients <= _maxPlayerProductSales / 10)
+            //{
+            //    _playerProductsArchive.Add(_playerProduct);
+            //    _playerProduct = null;
+            //    PlayerProductChanged?.Invoke(null);
+            //}
+            Debug.Log($"Player profit is {totalPlayerClients} * {_playerProduct.PerUnitProfit} = {playerProfit}");
             return playerProfit;
         }
         private ProductData[] GetActiveProducts()
