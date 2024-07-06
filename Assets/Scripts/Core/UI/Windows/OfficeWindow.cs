@@ -103,8 +103,8 @@ namespace Core.UI.Windows
             var isHiredProgrammer = _teamService.HiredEngineers.Contains(worker);
             var isFreeScientist = _teamService.FreeScientists.Contains(worker);
             var isFreeProgrammer = _teamService.FreeEngineers.Contains(worker);
-            var canHireScientist = _hiredScientistsViews.Count < _teamService.Office.ScientistsPlaces.Length;
-            var canHireProgrammer = _hiredProgrammersViews.Count < _teamService.Office.ProgrammersPlaces.Length;
+            var canHireScientist = false; //_hiredScientistsViews.Count < _teamService.Office.ScientistsPlaces.Length;
+            var canHireProgrammer = false; //_hiredProgrammersViews.Count < _teamService.Office.ProgrammersPlaces.Length;
 
             if (isHiredScientist)
                 FireScientist(worker);
@@ -165,10 +165,10 @@ namespace Core.UI.Windows
                               _teamService.HiredEngineers.Sum(worker => worker.Salary);
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(string.Format(_officeLevelTextFormat, _teamService.OfficeLevel));
-            stringBuilder.AppendLine(string.Format(_scientistsPlacesTextFormat,
-                _teamService.Office.ScientistsPlaces.Length));
-            stringBuilder.AppendLine(string.Format(_programmersPlacesTextFormat,
-                _teamService.Office.ProgrammersPlaces.Length));
+            //stringBuilder.AppendLine(string.Format(_scientistsPlacesTextFormat,
+            //    _teamService.Office.ScientistsPlaces.Length));
+            //stringBuilder.AppendLine(string.Format(_programmersPlacesTextFormat,
+            //    _teamService.Office.ProgrammersPlaces.Length));
             stringBuilder.AppendLine(string.Format(_rpProducingCountTextFormat, rpProducing));
             stringBuilder.AppendLine(string.Format(_dpProducingCountTextFormat, dpProducing));
             stringBuilder.AppendLine(string.Format(_totalSalaryTextFormat, totalSalary));
@@ -176,10 +176,10 @@ namespace Core.UI.Windows
         }
         private void UpdateTeamInformation()
         {
-            _hiredScientistsCountTextObject.text = string.Format(_hiredScientistsTitleTextFormat,
-                _hiredScientistsViews.Count, _teamService.Office.ScientistsPlaces.Length);
-            _hiredProgrammersCountTextObject.text = string.Format(_hiredProgrammersTitleTextFormat,
-                _hiredProgrammersViews.Count, _teamService.Office.ProgrammersPlaces.Length);
+            //_hiredScientistsCountTextObject.text = string.Format(_hiredScientistsTitleTextFormat,
+            //    _hiredScientistsViews.Count, _teamService.Office.ScientistsPlaces.Length);
+            //_hiredProgrammersCountTextObject.text = string.Format(_hiredProgrammersTitleTextFormat,
+            //    _hiredProgrammersViews.Count, _teamService.Office.ProgrammersPlaces.Length);
         }
         private void FireScientist(Worker worker)
         {

@@ -182,7 +182,7 @@ namespace Core.UI.Windows
             var totalProducePrice = selectedTechnologies.Sum(technology => technology.ProducePrice);
             var totalDevelopmentPrice = selectedTechnologies.Sum(technology => technology.DevelopPrice);
             var totalDevelopmentPoints = selectedTechnologies.Sum(technology => technology.DevelopPointsPrice);
-            var developmentDuration = Mathf.CeilToInt(totalDevelopmentPoints / totalDpGeneration);
+            var developmentDuration = Mathf.CeilToInt((float)totalDevelopmentPoints / totalDpGeneration);
             var canBuyDeveloping = _currencyService.GetCurrency(_moneyCurrencyData.Name).Value > totalDevelopmentPrice;
 
             _developButton.interactable = canBuyDeveloping && _nameInputField.text != string.Empty &&

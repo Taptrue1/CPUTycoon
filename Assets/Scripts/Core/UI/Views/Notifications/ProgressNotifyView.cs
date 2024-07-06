@@ -18,7 +18,7 @@ namespace Core.UI.Views.Notifications
         {
             _iconImage.sprite = technology.Icon;
             _titleTextObject.text = technology.Name;
-            _progressSlider.maxValue = technology.ResearchPointsPrice;
+            //_progressSlider.maxValue = technology.ResearchPointsPrice;
             _progressSlider.DOValue(currentRp, _animationDuration).Play();
         }
 

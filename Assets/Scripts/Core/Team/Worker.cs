@@ -10,10 +10,10 @@ namespace Core.Team
         public int Salary { get; }
         public int PointsGeneration { get; }
         public Sprite Icon { get; }
-        public GameObject WorkerViewPrefab { get; }
+        public GameObject ViewPrefab { get; }
         
         //TODO add bonuses
-        public Worker(string name, string surname, int age, int salary, int pointsGeneration, Sprite icon, GameObject workerViewPrefab)
+        public Worker(string name, string surname, int age, int salary, int pointsGeneration, Sprite icon, GameObject viewPrefab)
         {
             Age = age;
             Icon = icon;
@@ -21,7 +21,7 @@ namespace Core.Team
             Salary = salary;
             Surname = surname;
             PointsGeneration = pointsGeneration;
-            WorkerViewPrefab = workerViewPrefab;
+            ViewPrefab = viewPrefab;
         }
     }
 }

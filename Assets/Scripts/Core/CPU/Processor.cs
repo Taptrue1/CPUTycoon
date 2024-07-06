@@ -10,18 +10,19 @@ namespace Core.CPU
         public string Name { get; }
         public double BenefitRatio { get; }
         public double PerUnitProfit { get; }
-        public double DevelopPrice { get; } //TODO use it
+        public double DevelopPrice { get; }
         public double DevelopPointsPrice { get; }
+        
         public List<Technology> Technologies { get; }
-        public double TotalCosts { get; private set; } //TODO use it
-        public DateTime ReleaseDate { get; private set; } //TODO use it
+        public double TotalCosts { get; private set; }
+        public DateTime ReleaseDate { get; private set; }
 
         public Processor(string name, int sellPrice, List<Technology> technologies)
         {
             Name = name;
             Technologies = technologies;
-            BenefitRatio = technologies.Sum(tech => tech.Power) / (double)sellPrice;
-            PerUnitProfit = technologies.Sum(tech => tech.ProducePrice) / (double)sellPrice;
+            BenefitRatio = technologies.Sum(tech => tech.Power) / sellPrice;
+            PerUnitProfit = technologies.Sum(tech => tech.ProducePrice) - sellPrice;
             foreach (var technology in Technologies)
             {
                 DevelopPrice += technology.DevelopPrice;

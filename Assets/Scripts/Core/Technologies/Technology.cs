@@ -11,11 +11,11 @@ namespace Core.Technologies
     {
         public Sprite Icon { get; }
         public string Name { get; }
-        public int Power { get; }
-        public int DevelopPrice { get; }
-        public int ProducePrice { get; }
-        public int ResearchPointsPrice { get; }
-        public int DevelopPointsPrice { get; }
+        public double Power { get; }
+        public double DevelopPrice { get; }
+        public double ProducePrice { get; }
+        public double DevelopPointsPrice { get; }
+        public double ResearchPointsPrice { get; }
         public int Index { get; }
         public TechnologyType Type { get; }
         public List<Technology> Children { get; }

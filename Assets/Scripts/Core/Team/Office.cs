@@ -8,43 +8,39 @@ namespace Core.Team
     {
         [field: SerializeField] public double Price { get; private set; }
         [field: SerializeField] public Transform[] WorkersPlaces { get; private set; }
-        [field: SerializeField] public Transform[] ScientistsPlaces { get; private set; }
-        [field: SerializeField] public Transform[] ProgrammersPlaces { get; private set; }
         
-        private Dictionary<Worker, GameObject> _scientists = new();
-        private Dictionary<Worker, GameObject> _programmers = new();
+        private Dictionary<Worker, GameObject> _workers;
 
         private void OnDestroy()
         {
-            foreach(var scientist in _scientists)
-                Destroy(scientist.Value);
-            foreach(var programmer in _programmers)
-                Destroy(programmer.Value);
-            _scientists.Clear();
-            _programmers.Clear();
+            foreach (var worker in _workers.Keys)
+                Destroy(_workers[worker]);
         }
 
+        public void AddWorker(Worker worker)
+        {
+            var workerPlace = WorkersPlaces.First(place => place.childCount == 0);
+            var workerView = Instantiate(worker.ViewPrefab, workerPlace);
+            _workers.Add(worker, workerView);
+        }
+        public void RemoveWorker(Worker worker)
+        {
+            Destroy(_workers[worker]);
+            _workers.Remove(worker);
+        }
+        
+        //TODO Remove all this methods
         public void AddScientist(Worker worker)
         {
-            var workerPlace = ScientistsPlaces.First(place => place.childCount == 0);
-            var workerView = Instantiate(worker.WorkerViewPrefab, workerPlace);
-            _scientists.Add(worker, workerView);
         }
         public void AddProgrammer(Worker worker)
         {
-            var workerPlace = ProgrammersPlaces.First(place => place.childCount == 0);
-            var workerView = Instantiate(worker.WorkerViewPrefab, workerPlace);
-            _programmers.Add(worker, workerView);
         }
         public void RemoveScientist(Worker worker)
         {
-            Destroy(_scientists[worker]);
-            _scientists.Remove(worker);
         }
         public void RemoveProgrammer(Worker worker)
         {
-            Destroy(_programmers[worker]);
-            _programmers.Remove(worker);
         }
     }
 }

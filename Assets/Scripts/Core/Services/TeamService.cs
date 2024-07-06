@@ -87,11 +87,13 @@ namespace Core.Services
         }
         public bool CanHireScientist()
         {
-            return Office.ScientistsPlaces.Length > HiredScientists.Count;
+            return false;
+            //return Office.ScientistsPlaces.Length > HiredScientists.Count;
         }
         public bool CanHireProgrammer()
         {
-            return Office.ProgrammersPlaces.Length > HiredEngineers.Count;
+            return false;
+            //return Office.ProgrammersPlaces.Length > HiredEngineers.Count;
         }
 
         #region Callbacks

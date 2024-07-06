@@ -9,11 +9,11 @@ namespace Graphs
     {
         public Sprite Icon;
         public string Name;
-        public int Power;
-        public int ResearchPoints;
-        public int DevelopPoints;
-        public int DevelopPrice;
-        public int ProducePrice;
+        public double Power;
+        public double ResearchPoints;
+        public double DevelopPoints;
+        public double DevelopPrice;
+        public double ProducePrice;
         public int Index;
         public TechnologyType Type;
         [SerializeField] public List<TechNode> Children = new();
